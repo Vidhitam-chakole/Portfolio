@@ -74,6 +74,8 @@ To get this project running on your local machine, follow these simple steps:
 
 <!-- The Start menu groups the available experiences without taking permanent space from the desktop. -->
 
+<!-- The About Me app gives visitors a focused view of the creator and the work behind the interface. -->
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
