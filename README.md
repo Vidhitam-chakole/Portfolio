@@ -98,6 +98,8 @@ To get this project running on your local machine, follow these simple steps:
 
 <!-- Motion effects add feedback to opening and closing actions without changing the underlying workflow. -->
 
+<!-- Preloaded media helps visual assets appear smoothly when an application is opened. -->
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
