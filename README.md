@@ -66,6 +66,8 @@ To get this project running on your local machine, follow these simple steps:
 
 <!-- The application recreates a familiar desktop so visitors can explore the portfolio interactively. -->
 
+<!-- The login screen is intentionally lightweight because this portfolio does not require account storage. -->
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
