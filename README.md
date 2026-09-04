@@ -72,6 +72,8 @@ To get this project running on your local machine, follow these simple steps:
 
 <!-- The taskbar provides a consistent place to open applications and switch between active windows. -->
 
+<!-- The Start menu groups the available experiences without taking permanent space from the desktop. -->
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
