@@ -78,6 +78,8 @@ To get this project running on your local machine, follow these simple steps:
 
 <!-- The browser app keeps external browsing inside the desktop metaphor instead of redirecting immediately. -->
 
+<!-- The calculator demonstrates small utility interactions that can run entirely in the client. -->
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
