@@ -84,6 +84,8 @@ To get this project running on your local machine, follow these simple steps:
 
 <!-- The recycle bin adds a playful desktop detail while keeping the main navigation recognizable. -->
 
+<!-- The torch utility is designed for quick visual feedback without leaving the current desktop view. -->
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
