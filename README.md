@@ -88,6 +88,8 @@ To get this project running on your local machine, follow these simple steps:
 
 <!-- The media features are represented as app experiences so the portfolio remains cohesive from one screen to the next. -->
 
+<!-- The VS Code view highlights implementation details for visitors interested in the project structure. -->
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
