@@ -90,6 +90,8 @@ To get this project running on your local machine, follow these simple steps:
 
 <!-- The VS Code view highlights implementation details for visitors interested in the project structure. -->
 
+<!-- The desktop layout adapts to the viewport so the experience remains usable on smaller screens. -->
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
