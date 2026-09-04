@@ -94,6 +94,8 @@ To get this project running on your local machine, follow these simple steps:
 
 <!-- Shared window controls keep close, minimize, and maximize behavior consistent across applications. -->
 
+<!-- Reusable components reduce visual drift between the many small applications in the desktop. -->
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
