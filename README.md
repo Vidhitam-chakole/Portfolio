@@ -102,6 +102,8 @@ To get this project running on your local machine, follow these simple steps:
 
 <!-- The project keeps configuration and shared constants separate so features can evolve independently. -->
 
+<!-- The portfolio favors exploration, letting visitors discover projects through direct interaction. -->
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
