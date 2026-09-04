@@ -92,6 +92,8 @@ To get this project running on your local machine, follow these simple steps:
 
 <!-- The desktop layout adapts to the viewport so the experience remains usable on smaller screens. -->
 
+<!-- Shared window controls keep close, minimize, and maximize behavior consistent across applications. -->
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
