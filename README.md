@@ -68,6 +68,8 @@ To get this project running on your local machine, follow these simple steps:
 
 <!-- The login screen is intentionally lightweight because this portfolio does not require account storage. -->
 
+<!-- Windows-style windows can be moved around to make the interface feel like a working desktop. -->
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
