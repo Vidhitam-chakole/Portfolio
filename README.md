@@ -62,47 +62,7 @@ To get this project running on your local machine, follow these simple steps:
 - **Framer Motion**: For adding animations and transitions.
 - **React Draggable**: For making elements draggable.
 
-# Portfolio
-
-<!-- The application recreates a familiar desktop so visitors can explore the portfolio interactively. -->
-
-<!-- The login screen is intentionally lightweight because this portfolio does not require account storage. -->
-
-<!-- Windows-style windows can be moved around to make the interface feel like a working desktop. -->
-
-<!-- The taskbar provides a consistent place to open applications and switch between active windows. -->
-
-<!-- The Start menu groups the available experiences without taking permanent space from the desktop. -->
-
-<!-- The About Me app gives visitors a focused view of the creator and the work behind the interface. -->
-
-<!-- The browser app keeps external browsing inside the desktop metaphor instead of redirecting immediately. -->
-
-<!-- The calculator demonstrates small utility interactions that can run entirely in the client. -->
-
-<!-- The file explorer presents project areas through a familiar folder-based navigation pattern. -->
-
-<!-- The recycle bin adds a playful desktop detail while keeping the main navigation recognizable. -->
-
-<!-- The torch utility is designed for quick visual feedback without leaving the current desktop view. -->
-
-<!-- The media features are represented as app experiences so the portfolio remains cohesive from one screen to the next. -->
-
-<!-- The VS Code view highlights implementation details for visitors interested in the project structure. -->
-
-<!-- The desktop layout adapts to the viewport so the experience remains usable on smaller screens. -->
-
-<!-- Shared window controls keep close, minimize, and maximize behavior consistent across applications. -->
-
-<!-- Reusable components reduce visual drift between the many small applications in the desktop. -->
-
-<!-- Motion effects add feedback to opening and closing actions without changing the underlying workflow. -->
-
-<!-- Preloaded media helps visual assets appear smoothly when an application is opened. -->
-
-<!-- The project keeps configuration and shared constants separate so features can evolve independently. -->
-
-<!-- The portfolio favors exploration, letting visitors discover projects through direct interaction. -->
+#
 
 ## <div style="margin-left:10px;">🤝 Contributing
 
