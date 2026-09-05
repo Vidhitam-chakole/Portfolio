@@ -45,13 +45,9 @@ function VsCode({ isAppOpen, toggleVsCode, bounds, isActive = false, bringToFron
               </button>
             </div>
           </div>
-          <div className="content text-white select-none text-center flex justify-center h-full">
+          <div className="content text-white select-none text-center flex justify-center items-center h-full bg-neutral-950">
             {contentLoaded && (
-              <iframe
-                src="https://github1s.com/MishanPoudel/Windows11-3.0/blob/main/src/Pages/main.js"
-                title="VsCode"
-                className="h-full w-full bg-ub-cool-grey"
-              ></iframe>
+              <p className="text-neutral-400 font-normal">No project is embedded.</p>
             )}
           </div>
         </div>

@@ -36,7 +36,6 @@ function Main() {
     vscode: false,
     recycle: false,
     app: false,
-    emoji: false,
     spotify: false,
     destroyer: false,
   });
@@ -75,7 +74,7 @@ function Main() {
     let wasOpen = false;
     let actualWindow = window;
 
-    if (window === 'app' && input && (input === 'emoji' || input === 'spotify')) {
+    if (window === 'app' && input && input === 'spotify') {
       actualWindow = input;
     }
     if (window === 'browser' && input && (input === 'chrome' || input === 'edge')) {
@@ -107,7 +106,7 @@ function Main() {
       if (window !== 'start' && window !== 'menu') newState.start = false;
       newState[actualWindow] = !wasOpen;
 
-      if (actualWindow === 'emoji' || actualWindow === 'spotify') {
+      if (actualWindow === 'spotify') {
         newState.app = !wasOpen;
         if (wasOpen) {
           newState[actualWindow] = false;

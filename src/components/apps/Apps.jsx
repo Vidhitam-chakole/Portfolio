@@ -33,45 +33,7 @@ function Apps({ isAppOpen, toggleApp, bounds, input, isActive = false, bringToFr
         } ${isActive ? 'z-40' : 'z-30'} w-full h-screen pointer-events-none absolute transition-none`}
       >
         <Draggable handle=".title-bar" nodeRef={windowRef} bounds={bounds}>
-          {input === "emoji" ? (
-            <div
-              ref={windowRef}
-              className="window bg-black h-[45rem] w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] font-semibold pointer-events-auto"
-              onMouseDown={bringToFront}
-            >
-              <div className="title-bar">
-                <div className="text-white h-9 flex justify-between select-none">
-                    <div className="m-1 ml-4 font-normal">Emoji TicTacToe</div>
-                  <div className="flex">
-                    <div
-                      className="hover:bg-neutral-800 mb-2 w-11 flex justify-center items-center text-xl"
-                      onClick={() => minimizeWindow && minimizeWindow(input)}
-                    >
-                      <MdMinimize />
-                    </div>
-                    <div className="hover:bg-neutral-800 mb-2 w-11 flex justify-center items-center text-sm">
-                      <MdCheckBoxOutlineBlank />
-                    </div>
-                    <div
-                      className="hover:bg-red-700 mb-2 w-12 flex justify-center items-center text-xl"
-                      onClick={() => toggleApp(input)}
-                    >
-                      <MdClose />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="content text-white select-none text-center flex justify-center h-full">
-                {contentLoaded && (
-                  <iframe
-                    src="https://emoji-tic-tac-toe.vercel.app/"
-                    title="Emoji"
-                    className="h-full w-full bg-ub-cool-grey"
-                  ></iframe>
-                )}
-              </div>
-            </div>
-          ) : input === "spotify" ? (
+          {input === "spotify" ? (
             <div
               ref={windowRef}
               className="window bg-black h-[45rem] w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] font-semibold pointer-events-auto"

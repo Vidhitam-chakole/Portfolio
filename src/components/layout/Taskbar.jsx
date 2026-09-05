@@ -83,10 +83,6 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
     minimizeWindow && minimizeWindow('recycle');
   }, [minimizeWindow]);
 
-  const handleEmojiClick = useCallback(() => {
-    minimizeWindow && minimizeWindow('emoji');
-  }, [minimizeWindow]);
-
   const handleSpotifyClick = useCallback(() => {
     minimizeWindow && minimizeWindow('spotify');
   }, [minimizeWindow]);
@@ -148,14 +144,6 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
             onClick={handleRecycleClick}
             icon="/images/apps/recyclebin.png"
             alt="Recycle Bin"
-            isActive={true}
-          />
-        )}
-        {windows.emoji && (
-          <TaskbarButton
-            onClick={handleEmojiClick}
-            icon="https://raw.githubusercontent.com/MishanPoudel/Emoji-TicTacToe/main/public/favicon.ico"
-            alt="Emoji TicTacToe"
             isActive={true}
           />
         )}

@@ -14,7 +14,6 @@ import {
   MdNavigateNext,
   MdSearch,
   MdExpandMore,
-  MdFavorite,
   MdChevronRight,
   MdPushPin,
 } from "react-icons/md";
@@ -24,7 +23,6 @@ const NAVIGATION_ITEMS = [
   { id: 'Education', label: 'Education', icon: 'edu.png' },
   { id: 'Skills', label: 'Skills', icon: 'skills.png' },
   { id: 'My Stuffs', label: 'My Stuffs', icon: 'projects.png' },
-  { id: 'Resume', label: 'Resume', icon: 'resume.png' },
 ];
 
 const QUICK_ACCESS_FOLDERS = [
@@ -151,7 +149,6 @@ const Explorer = ({ isExplorerOpen, toggleExplorer, aboutMe, bounds, isActive = 
       "Education": "edu",
       "Skills": "skills",
       "My Stuffs": "projects",
-      "Resume": "resume",
       "About Me": "me"
     };
     setIcon(iconMap[page] || "me");
@@ -392,17 +389,6 @@ const Explorer = ({ isExplorerOpen, toggleExplorer, aboutMe, bounds, isActive = 
                       onClick={() => navigateToPage(item.id)}
                     />
                   ))}
-                  <a
-                    href="https://github.com/sponsors/MishanPoudel"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center pl-2.5 mr-8 text-xs w-full h-10 rounded-sm hover:bg-neutral-700 text-white bg-neutral-800 border border-black text-center border-opacity-30 gap-2 group"
-                  >
-                    <span className="text-sm ml-5 group-hover:text-red-700">
-                      <MdFavorite />
-                    </span>
-                    Sponsor
-                  </a>
                 </div>
                 <AboutMe
                   page={page}
