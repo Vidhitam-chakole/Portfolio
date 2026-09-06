@@ -87,10 +87,11 @@ function Login({ toggleLogin }) {
                 required
                 autoComplete="current-password"
               />
+             
               <div
                 className="text-white mt-3 text-sm btn btn-ghost hover:text-black tooltip tooltip-bottom flex w-auto"
                 onClick={toggleLogin}
-                data-tip="You can log in by typing anything into the input fields and pressing enter—no credentials needed!"
+                data-tip="Apne bhai ka name dalo (vidhitam)"
               >
                 I forgot my PIN
               </div>
