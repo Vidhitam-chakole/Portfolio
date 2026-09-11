@@ -26,9 +26,11 @@ export const useWindowSize = () => {
     };
 
     window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
     return () => {
       if (timeoutId) clearTimeout(timeoutId);
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
     };
   }, []);
 

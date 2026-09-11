@@ -31,9 +31,17 @@ export const calculateWindowBounds = (windowWidth, windowHeight) => {
   return {
     left: 0,
     top: 0,
-    right: screenWidth - windowWidth,
-    bottom: screenHeight - windowHeight - 40,
+    right: Math.max(0, screenWidth - windowWidth),
+    bottom: Math.max(0, screenHeight - windowHeight - 48),
   };
+};
+
+export const isCompactViewport = () => {
+  if (typeof window === "undefined") return false;
+  return (
+    window.innerWidth < 900 ||
+    (window.matchMedia("(pointer: coarse)").matches && window.innerWidth < 1100)
+  );
 };
 
 /**
