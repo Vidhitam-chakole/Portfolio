@@ -10,11 +10,15 @@ This is **Vidhitam Chakole**'s Windows-style portfolio, built with **React.js**.
 
 ## <div style="margin-left:10px;">🎨 Features
 
-- **🌐 Chrome**: Surf the web just like in a real Chrome browser.
-- **🧮 Calculator**: Perform basic arithmetic operations with this handy calculator.
-- **💻 VS Code**: Virtual Visual Studio Code environment.
-- **🎵 Spotify**: Enjoy a simulated music player interface.
-- **📁 About Me**: Learn about Vidhitam Chakole.
+- **🌐 Browser windows**: Chrome and Edge are simulated with fake browsing experiences.
+- **🧮 Calculator**: Perform arithmetic with a working calculator and built-in easter egg.
+- **💻 VS Code**: Virtual editor shell for a portfolio-style workspace mockup.
+- **🎵 Spotify**: Embedded playlist experience inside the desktop UI.
+- **📁 Explorer**: Portfolio and about-me navigation with fake desktop folders.
+- **🧪 Desktop Destroyer**: Full-screen canvas toy with destructive tools and effects.
+- **📱 Mobile optimization**: Responsive layout, landscape prompts, and portable window behavior.
+- **🎨 Video wallpaper toggle**: Swap the static wallpaper for a looping video background.
+- **🔒 Lock-screen and sleep states**: Windows-like login, sleep, and shutdown flows.
 
 ## <div style="margin-left:10px;">🚀 Installation
 
@@ -51,6 +55,7 @@ To get this project running on your local machine, follow these simple steps:
 - **Login Page**: You can enter anything on the login page to gain access to the app. No need for actual credentials! 🔐
 - Click on the icons on the desktop to open the different apps.
 - Use the taskbar to switch between open applications.
+- On smaller screens, the app now adapts with viewport-aware sizing, portrait prompts, and mobile-friendly dragging.
 - Interact with the apps to explore their features and functionalities!
 
 ## <div style="margin-left:10px;">🛠️ Technologies Used
