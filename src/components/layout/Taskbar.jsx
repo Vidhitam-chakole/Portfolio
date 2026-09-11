@@ -92,12 +92,12 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
   }, [minimizeWindow]);
 
   return (
-    <div className="fixed bottom-0 flex justify-between w-full h-12 bg-[#202020] border-t border-neutral-700 select-none pointer-events-auto text-white z-40 py-0.5">
+    <div className="fixed bottom-0 flex justify-between w-full h-12 bg-[#202020] border-t border-neutral-700 select-none pointer-events-auto text-white z-40 py-0.5 pb-[max(0.125rem,env(safe-area-inset-bottom))] overflow-hidden">
       {/* Left spacer for centering (responsive) */}
-      <div className="w-12 sm:w-[15%]" aria-hidden="true" />
+      <div className="hidden sm:block w-12 sm:w-[15%]" aria-hidden="true" />
 
       {/* Center - App icons */}
-      <nav className="flex justify-center items-center gap-1 sm:gap-2" role="navigation" aria-label="Taskbar applications">
+      <nav className="flex justify-center items-center gap-0.5 sm:gap-2 overflow-x-auto max-w-[58%] sm:max-w-none" role="navigation" aria-label="Taskbar applications">
         <TaskbarButton
           onClick={toggleStart}
           icon="/images/apps/windows.png"
@@ -171,14 +171,14 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
         {/* Expand button */}
         <button
           type="button"
-          className="flex justify-center items-center h-full px-2 hover:bg-white/10 transition-colors duration-150 rounded-lg cursor-pointer"
+          className="taskbar-tray-extras hidden sm:flex justify-center items-center h-full px-2 hover:bg-white/10 transition-colors duration-150 rounded-lg cursor-pointer"
           aria-label="Show hidden icons"
         >
           <FaChevronUp className="text-xs" />
         </button>
 
         {/* Network, volume, battery icons */}
-        <div className="flex items-center h-full px-2 sm:px-3 hover:bg-white/10 transition-colors duration-150 gap-3 rounded-lg">
+        <div className="taskbar-tray-extras hidden sm:flex items-center h-full px-2 sm:px-3 hover:bg-white/10 transition-colors duration-150 gap-3 rounded-lg">
           <SystemTrayIcon icon={FaWifi} />
           <SystemTrayIcon icon={FaVolumeUp} />
           <SystemTrayIcon icon={FaBatteryFull} />
@@ -190,17 +190,17 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
           className="flex items-center h-full px-2 sm:px-3 hover:bg-white/10 transition-colors duration-150 rounded-lg cursor-pointer"
           aria-label="Notifications and calendar"
         >
-          <time className="flex flex-col items-end text-[11px] leading-tight mr-2">
+          <time className="flex flex-col items-end text-[11px] leading-tight mr-1 sm:mr-2">
             <span>{formatTime(currentTime)}</span>
-            <span>{formatDate(currentTime)}</span>
+            <span className="hidden sm:inline">{formatDate(currentTime)}</span>
           </time>
-          <FaBell className="text-sm" aria-hidden="true" />
+          <FaBell className="text-sm hidden sm:block" aria-hidden="true" />
         </button>
 
         {/* Show desktop button */}
         <button
           type="button"
-          className="group w-3 h-full flex justify-center items-center transition-colors duration-150 cursor-pointer"
+          className="group w-3 h-full hidden sm:flex justify-center items-center transition-colors duration-150 cursor-pointer"
           aria-label="Show desktop"
         >
           <span className="hidden group-hover:block text-neutral-400 text-md pointer-events-none" aria-hidden="true">
@@ -209,7 +209,7 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
         </button>
       </div>
 
-      <div className="absolute right-2 bottom-16 sm:right-5 sm:bottom-14 z-50">
+      <div className="absolute right-2 bottom-16 sm:right-5 sm:bottom-14 z-50 hidden landscape:block sm:block">
         <motion.div
           drag
           dragMomentum={false}

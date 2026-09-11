@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Draggable from "react-draggable";
 import WindowTitleBar from "./WindowTitleBar";
+import { useWindowSize } from "../../hooks";
 
 /**
  * Reusable draggable window wrapper component
@@ -21,11 +22,14 @@ const DraggableWindow = ({
   isActive = false,
   bringToFront,
 }) => {
+  const { width } = useWindowSize();
+  const disableDrag = width < 900;
+
   if (!isOpen) return null;
 
   return (
-    <div className={`${isMinimized ? 'hidden' : ''} ${isActive ? 'z-40' : 'z-30'} w-full h-screen pointer-events-none absolute transition-none`}>
-      <Draggable handle=".title-bar" nodeRef={windowRef} bounds={bounds}>
+    <div className={`${isMinimized ? 'hidden' : ''} ${isActive ? 'z-40' : 'z-30'} w-full h-[100dvh] pointer-events-none absolute transition-none`}>
+      <Draggable handle=".title-bar" nodeRef={windowRef} bounds={bounds} disabled={disableDrag}>
         <div
           ref={windowRef}
           className={`window bg-black rounded-xl overflow-hidden border-neutral-700 border-[1.5px] pointer-events-auto ${className}`}
