@@ -188,6 +188,11 @@ function Main() {
       >
         <div
           className="desktop-icon w-[4.5rem] flex flex-col justify-start items-center rounded hover:bg-white hover:bg-opacity-10 p-1.5"
+          onClick={() => {
+            if (window.matchMedia("(pointer: coarse)").matches) {
+              toggleWindow(app.action, app.subAction);
+            }
+          }}
           onDoubleClick={() => toggleWindow(app.action, app.subAction)}
         >
           <img
@@ -287,8 +292,8 @@ function Main() {
       return {
         left: 0,
         top: 0,
-        right: screenWidth - w,
-        bottom: screenHeight - h - 40,
+        right: Math.max(0, screenWidth - w),
+        bottom: Math.max(0, screenHeight - h - 48),
       };
     };
 
@@ -349,6 +354,10 @@ function Main() {
     const el = document.documentElement;
 
     const requestFullscreenSafely = () => {
+      const isMobile =
+        window.innerWidth < 900 ||
+        /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) return;
       if (!document.fullscreenElement && el.requestFullscreen) {
         el.requestFullscreen().catch(() => {
           // Ignore failures (e.g., browser blocking without user gesture)
@@ -375,7 +384,7 @@ function Main() {
   // Show loading spinner while critical assets are loading
   if (!iconsLoaded || !audiosLoaded) {
     return (
-      <div className="relative h-screen w-full bg-black flex items-center justify-center">
+      <div className="relative h-[100dvh] w-full bg-black flex items-center justify-center">
         <LoadingSpinner />
       </div>
     );
@@ -419,7 +428,7 @@ function Main() {
         <Torch input={input} setInput={setInput} />
       </Suspense>
       <div 
-        className="relative h-screen desktop-background" 
+        className="relative h-[100dvh] desktop-background overflow-hidden" 
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
