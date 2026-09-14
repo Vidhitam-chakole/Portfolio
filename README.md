@@ -83,3 +83,5 @@ I’m a beginner in React.js and web development, so my code might not be perfec
 </p>
 
 <div style="margin:20px; font-size:20px;"><strong>Enjoy exploring this Windows Clone app! 🎉💻🖱</strong>
+
+<!-- Comment change #1: documentation note added without changing existing content. -->
