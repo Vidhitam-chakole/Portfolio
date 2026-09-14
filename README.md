@@ -97,3 +97,5 @@ I’m a beginner in React.js and web development, so my code might not be perfec
 <!-- Comment change #6: documentation note added without changing existing content. -->
 
 <!-- Comment change #7: documentation note added without changing existing content. -->
+
+<!-- Comment change #8: documentation note added without changing existing content. -->
