@@ -70,6 +70,7 @@ For a production-style check, create an optimized bundle with `npm run build`. T
 ## <div style="margin-left:10px;">💻 Usage
 
 - **Login Page**: You can enter anything on the login page to gain access to the app. No need for actual credentials! 🔐
+- After login, the portfolio opens at a user-specific desktop route such as `/Vidhitam`.
 - Click on the icons on the desktop to open the different apps.
 - Use the taskbar to switch between open applications.
 - Interact with the apps to explore their features and functionalities!
