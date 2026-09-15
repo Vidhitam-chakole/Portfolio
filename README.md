@@ -80,6 +80,7 @@ For a production-style check, create an optimized bundle with `npm run build`. T
 ## <div style="margin-left:10px;">🛠️ Technologies Used
 
 - **React.js**: For building the interactive user interface.
+- **React 18**: Provides the component and rendering model for the desktop experience.
 - **Tailwind CSS**: For styling the components and creating a desktop-like experience.
 - **React Router DOM**: For managing navigation and routing within the app.
 - **Framer Motion**: For adding animations and transitions.
