@@ -42,7 +42,7 @@ To get this project running on your local machine, follow these simple steps:
 1. **Clone the repository:**
 
    ```bash
-   git clone <your-repository-url>
+   git clone https://github.com/Vidhitam-chakole/Portfolio.git
    ```
 
 2. **Navigate to the project directory:**
