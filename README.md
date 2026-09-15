@@ -86,6 +86,8 @@ For a production-style check, create an optimized bundle with `npm run build`. T
 - **Framer Motion**: For adding animations and transitions.
 - **React Draggable**: For making elements draggable.
 
+The app uses lazy-loaded route pages and shared window components so the login screen and desktop workspace can load independently.
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
