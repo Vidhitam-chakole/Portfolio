@@ -65,6 +65,8 @@ To get this project running on your local machine, follow these simple steps:
 
    Your app will open in your default web browser at [http://localhost:3000](http://localhost:3000) 🎉
 
+For a production-style check, create an optimized bundle with `npm run build`. The generated files are written to the `build/` directory.
+
 ## <div style="margin-left:10px;">💻 Usage
 
 - **Login Page**: You can enter anything on the login page to gain access to the app. No need for actual credentials! 🔐
