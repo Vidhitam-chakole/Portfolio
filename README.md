@@ -88,6 +88,14 @@ For a production-style check, create an optimized bundle with `npm run build`. T
 
 The app uses lazy-loaded route pages and shared window components so the login screen and desktop workspace can load independently.
 
+### Available scripts
+
+| Command | Purpose |
+| --- | --- |
+| `npm start` | Run the development server with hot reload. |
+| `npm run build` | Create an optimized production bundle. |
+| `npm test` | Run the test watcher provided by Create React App. |
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
