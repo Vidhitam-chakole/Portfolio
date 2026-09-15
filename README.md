@@ -33,6 +33,12 @@ The experience is designed to be explored like a personal computer: sign in, ope
 
 To get this project running on your local machine, follow these simple steps:
 
+### Prerequisites
+
+- Node.js 18 or newer
+- npm 9 or newer
+- A modern desktop browser with JavaScript enabled
+
 1. **Clone the repository:**
 
    ```bash
