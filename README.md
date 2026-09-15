@@ -73,6 +73,7 @@ For a production-style check, create an optimized bundle with `npm run build`. T
 - After login, the portfolio opens at a user-specific desktop route such as `/Vidhitam`.
 - Click on the icons on the desktop to open the different apps.
 - Use the taskbar to switch between open applications.
+- Drag a window by its title bar to reposition it, and use the title-bar controls to minimize or close it.
 - Interact with the apps to explore their features and functionalities!
 
 ## <div style="margin-left:10px;">🛠️ Technologies Used
