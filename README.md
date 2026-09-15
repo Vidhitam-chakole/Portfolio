@@ -1,6 +1,8 @@
-# <div style="margin:10px 0px; font-size:50px;" align="center">🖥️ Windows 11</div>
+# <div style="margin:10px 0px; font-size:50px;" align="center">🖥️ Vidhitam's Windows Portfolio</div>
 
-This is **Vidhitam Chakole**'s Windows-style portfolio, built with **React.js**. Dive into an interactive desktop simulation with apps and features to explore.
+This is **Vidhitam Chakole**'s Windows-style portfolio, built with **React.js**. Explore an interactive desktop simulation that presents projects, experiments, and profile details through familiar desktop apps.
+
+The experience is designed to be explored like a personal computer: sign in, open apps from the desktop or Start menu, move windows around, and use the taskbar to switch between them.
 
 <p align="center">
     <img src="public/screenshots/desktop.png" alt="desktop" width="400px">
@@ -83,33 +85,3 @@ I’m a beginner in React.js and web development, so my code might not be perfec
 </p>
 
 <div style="margin:20px; font-size:20px;"><strong>Enjoy exploring this Windows Clone app! 🎉💻🖱</strong>
-
-<!-- Comment change #1: documentation note added without changing existing content. -->
-
-<!-- Comment change #2: documentation note added without changing existing content. -->
-
-<!-- Comment change #3: documentation note added without changing existing content. -->
-
-<!-- Comment change #4: documentation note added without changing existing content. -->
-
-<!-- Comment change #5: documentation note added without changing existing content. -->
-
-<!-- Comment change #6: documentation note added without changing existing content. -->
-
-<!-- Comment change #7: documentation note added without changing existing content. -->
-
-<!-- Comment change #8: documentation note added without changing existing content. -->
-
-<!-- Comment change #9: documentation note added without changing existing content. -->
-
-<!-- Comment change #10: documentation note added without changing existing content. -->
-
-<!-- Comment change #11: documentation note added without changing existing content. -->
-
-<!-- Comment change #12: documentation note added without changing existing content. -->
-
-<!-- Comment change #13: documentation note added without changing existing content. -->
-
-<!-- Comment change #14: documentation note added without changing existing content. -->
-
-<!-- Comment change #15: documentation note added without changing existing content. -->
