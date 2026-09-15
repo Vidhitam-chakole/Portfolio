@@ -25,6 +25,9 @@ The experience is designed to be explored like a personal computer: sign in, ope
 - **💻 VS Code**: Virtual Visual Studio Code environment.
 - **🎵 Spotify**: Enjoy a simulated music player interface.
 - **📁 About Me**: Learn about Vidhitam Chakole.
+- **🗂️ File Explorer**: Browse the portfolio's project and media folders.
+- **🧹 Recycle Bin**: Explore a playful simulated recycle bin.
+- **🛠️ Desktop Destroyer**: Interact with a canvas-based desktop destruction experiment.
 
 ## <div style="margin-left:10px;">🚀 Installation
 
