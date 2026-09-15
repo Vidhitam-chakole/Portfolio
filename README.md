@@ -4,6 +4,14 @@ This is **Vidhitam Chakole**'s Windows-style portfolio, built with **React.js**.
 
 The experience is designed to be explored like a personal computer: sign in, open apps from the desktop or Start menu, move windows around, and use the taskbar to switch between them.
 
+## Contents
+
+- [Features](#-features)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Technologies](#-technologies-used)
+- [Contributing](#-contributing)
+
 <p align="center">
     <img src="public/screenshots/desktop.png" alt="desktop" width="400px">
     <img src="public/screenshots/lockscreen.png" alt="lockscreen" width="400px">
