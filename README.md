@@ -96,6 +96,12 @@ The app uses lazy-loaded route pages and shared window components so the login s
 | `npm run build` | Create an optimized production bundle. |
 | `npm test` | Run the test watcher provided by Create React App. |
 
+### Troubleshooting
+
+- If dependencies are out of sync, remove `node_modules` and `package-lock.json`, then run `npm install` again.
+- If port 3000 is busy, accept the alternate port offered by the development server or stop the process using port 3000.
+- If media does not load, confirm that the app is being served through `npm start` rather than opened directly as a file.
+
 ## <div style="margin-left:10px;">🤝 Contributing
 
 Want to contribute? We’d love your help! Fork the repository, make your changes, and submit a pull request. Please follow the coding standards and include tests where necessary.
