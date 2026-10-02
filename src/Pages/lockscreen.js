@@ -1,23 +1,22 @@
+import React from "react";
 import Login from "../components/user/Login";
-
 
 function Lockscreen() {
   return (
-    <>
-      <video
-        className="absolute bg-black h-screen w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-      >
-        <source src="/videos/background_login.mp4" type="video/mp4" />
-      </video>
+    <div
+      className="relative h-screen w-full overflow-hidden bg-cover bg-center bg-no-repeat select-none"
+      style={{
+        backgroundImage: `url('/images/wallpapers/windows11.jpg')`,
+      }}
+    >
+      {/* Windows 11 Acrylic / Vignette Overlay */}
+      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm transition-all duration-500" />
 
-      <div className="absolute left-0 top-0 h-screen w-full flex flex-col items-center justify-center z-10">
+      {/* Login / Lockscreen Interface */}
+      <div className="relative h-full w-full flex flex-col items-center justify-center z-10">
         <Login />
       </div>
-    </>
+    </div>
   );
 }
 

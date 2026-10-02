@@ -25,6 +25,7 @@ body {
   background-repeat: no-repeat;
   overflow: hidden;
   background-size: cover;
+  background-position: center;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   transform: translateZ(0);
   backface-visibility: hidden;

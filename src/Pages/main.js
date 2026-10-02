@@ -65,7 +65,8 @@ function Main() {
     () => ["/audio/sleep.mp3", "/audio/lullaby.mp3", "/audio/shutdown.mp3"],
     []
   );
-  const audiosLoaded = useMediaPreloader(audioUrls);
+  // Preload audio files in background for sleep/shutdown sounds
+  useMediaPreloader(audioUrls);
 
   // Memoized toggle function with useCallback for better performance
   const toggleWindow = useCallback((window, input = null) => {
@@ -372,8 +373,8 @@ function Main() {
     };
   }, []);
 
-  // Show loading spinner while critical assets are loading
-  if (!iconsLoaded || !audiosLoaded) {
+  // Render desktop immediately once critical icons are ready (audio preloads in background)
+  if (!iconsLoaded) {
     return (
       <div className="relative h-screen w-full bg-black flex items-center justify-center">
         <LoadingSpinner />

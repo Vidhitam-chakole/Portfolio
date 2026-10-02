@@ -9,17 +9,17 @@ function Login({ toggleLogin }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  localStorage.setItem("name", name);
 
   async function login(e) {
     e.preventDefault();
     try {
       setLoading(true);
-      // Simulating a delay for demonstration purposes
+      const trimmedName = name.trim() || "User";
+      localStorage.setItem("name", trimmedName);
       setTimeout(() => {
-        navigate(`/${name}`);
+        navigate(`/${trimmedName}`);
         setLoading(false);
-      }, 3000);
+      }, 400);
     } catch (err) {
       console.error(err);
       setError("Failed to log in. Please try again later.");
