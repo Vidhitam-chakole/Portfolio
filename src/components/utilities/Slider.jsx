@@ -83,39 +83,39 @@ export default function Slider({ isMenuOpen, toggleMenu }) {
       }}
     >
       <div className="relative flex flex-col justify-center h-full text-primary">
-        <div className="absolute flex flex-col items-center w-full top-32 text-white">
-          <div className="text-9xl font-bold">{formatTime(currentTime)}</div>
-          <div className="font-semibold text-4xl mt-5">
+        <div className="absolute flex flex-col items-center w-full top-16 sm:top-24 md:top-32 text-white px-4">
+          <div className="text-6xl sm:text-8xl md:text-9xl font-bold tracking-tight">{formatTime(currentTime)}</div>
+          <div className="font-semibold text-xl sm:text-3xl md:text-4xl mt-2 sm:mt-5 text-center">
             {formatDate(currentTime)}
           </div>
         </div>
-        <div className="absolute bottom-56 left-0 right-0 text-white">
-          <div className="text-sm font-light opacity-70 mb-2 text-center">Did you know?</div>
-          <div className="text-sm font-light max-w-md mx-auto px-4 text-center min-h-[60px]">
+        <div className="absolute bottom-24 sm:bottom-40 md:bottom-56 left-0 right-0 text-white px-4">
+          <div className="text-xs sm:text-sm font-light opacity-70 mb-1 sm:mb-2 text-center">Did you know?</div>
+          <div className="text-xs sm:text-sm font-light max-w-md mx-auto px-4 text-center min-h-[50px] leading-relaxed">
             {funFact}
           </div>
         </div>
-        <div className="absolute top-0 flex justify-between w-full h-full py-12 px-32 text-white">
+        <div className="absolute top-0 flex justify-between w-full h-full py-6 sm:py-12 px-6 sm:px-16 md:px-32 text-white pointer-events-none">
           <a
             href="https://google.com"
-            className="btn"
+            className="btn btn-circle bg-black/40 border-white/20 text-white pointer-events-auto hover:bg-black/60"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open Google"
           >
             <div>
-              <MdSearch />
+              <MdSearch className="text-xl" />
             </div>
           </a>
           <a
             href="https://i.pinimg.com/564x/3a/08/4e/3a084e04a46b5f0cdf09fec54659dc07.jpg"
-            className="btn"
+            className="btn btn-circle bg-black/40 border-white/20 text-white pointer-events-auto hover:bg-black/60"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open Photo"
           >
             <div>
-              <MdPhotoCamera />
+              <MdPhotoCamera className="text-xl" />
             </div>
           </a>
         </div>

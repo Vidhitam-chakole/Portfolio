@@ -86,17 +86,17 @@ const AboutMe = ({ page, handleDivClick, expandedDiv }) => {
     switch (page) {
       case "About Me":
         return (
-          <div className="hero min-h-auto justify-start">
-            <div className="hero-content flex-col lg:flex-row">
+          <div className="hero min-h-auto justify-start py-4">
+            <div className="hero-content flex-col lg:flex-row items-center gap-6">
               <div
-                className="max-w-sm rounded-lg shadow-2xl h-96 w-96 bg-neutral-800 flex items-center justify-center text-7xl font-bold select-none"
+                className="rounded-2xl shadow-2xl w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-neutral-800 flex items-center justify-center text-4xl sm:text-5xl md:text-6xl font-bold select-none border border-neutral-700 shrink-0"
                 aria-label="Profile placeholder"
               >
                 {ownerInitials}
               </div>
-              <div>
-                <h1 className="text-5xl font-bold">{ownerName}</h1>
-                <p className="py-6">{profileDescription}</p>
+              <div className="text-center lg:text-left">
+                <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold">{ownerName}</h1>
+                <p className="py-3 sm:py-6 text-sm sm:text-base text-neutral-300">{profileDescription}</p>
               </div>
             </div>
           </div>
@@ -146,51 +146,54 @@ const AboutMe = ({ page, handleDivClick, expandedDiv }) => {
         );
       case "Skills":
         return (
-          <div className="main-container flex h-screen relative">
+          <div className="main-container flex h-full relative p-2">
             {expandedDiv === 0 && (
-              <>
+              <div className="flex flex-wrap gap-3">
                 <div
-                  className="w-[5em] h-28 flex flex-col pt-2 items-center rounded-md hover:bg-white hover:bg-opacity-20"
+                  className="w-[5em] h-28 flex flex-col pt-2 items-center rounded-md hover:bg-white hover:bg-opacity-20 cursor-pointer active:bg-white/30"
                   onDoubleClick={() => handleDivClick(1)}
+                  onClick={() => handleDivClick(1)}
                 >
                   <img
                     src="/images/apps/folder.png"
                     alt="Technical"
                     className="w-12 h-12"
                   />
-                  <div className="text-balance text-center text-sm select-none pt-2">
+                  <div className="text-balance text-center text-xs sm:text-sm select-none pt-2">
                     Technical Skills
                   </div>
                 </div>
 
                 <div
-                  className="w-[5em] h-28 flex flex-col pt-2 items-center rounded-md hover:bg-white hover:bg-opacity-20"
+                  className="w-[5em] h-28 flex flex-col pt-2 items-center rounded-md hover:bg-white hover:bg-opacity-20 cursor-pointer active:bg-white/30"
                   onDoubleClick={() => handleDivClick(2)}
+                  onClick={() => handleDivClick(2)}
                 >
                   <img
                     src="/images/apps/folder.png"
                     alt="Soft"
                     className="w-12 h-12"
                   />
-                  <div className="text-balance text-center text-sm select-none pt-2">
+                  <div className="text-balance text-center text-xs sm:text-sm select-none pt-2">
                     Soft Skills
                   </div>
                 </div>
 
                 <div
-                  className="w-[5em] h-28 flex flex-col pt-2 items-center rounded-md hover:bg-white hover:bg-opacity-20"
+                  className="w-[5em] h-28 flex flex-col pt-2 items-center rounded-md hover:bg-white hover:bg-opacity-20 cursor-pointer active:bg-white/30"
                   onDoubleClick={() => handleDivClick(3)}
+                  onClick={() => handleDivClick(3)}
                 >
                   <img
                     src="/images/apps/folder.png"
                     alt="Design"
                     className="w-12 h-12"
                   />
-                  <div className="text-balance text-center text-sm select-none pt-2">
+                  <div className="text-balance text-center text-xs sm:text-sm select-none pt-2">
                     Design Skills
                   </div>
                 </div>
-              </>
+              </div>
             )}
 
             {expandedDiv === 1 && (
@@ -275,7 +278,7 @@ const AboutMe = ({ page, handleDivClick, expandedDiv }) => {
   };
 
   return (
-    <main className="h-[100vh] w-full ml-2.5 mt-2">
+    <main className="h-full max-h-[calc(82vh-7rem)] w-full ml-2.5 mt-2 overflow-y-auto pr-3 pb-16" style={{ scrollbarWidth: 'thin', scrollbarColor: '#666 transparent' }}>
       {renderPageContent()}
     </main>
   );

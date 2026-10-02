@@ -45,14 +45,6 @@ const appsData = [
     size: "w-14 h-14",
   },
   {
-    id: 4,
-    name: "Microsoft Edge",
-    icon: "/images/apps/edge.png",
-    action: "browser",
-    subAction: "edge",
-    size: "w-11 h-11",
-  },
-  {
     id: 5,
     name: "Calculator",
     icon: "/images/apps/calculator.png",

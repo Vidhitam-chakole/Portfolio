@@ -74,6 +74,8 @@ portfolio/
 │   │   │   ├── Login.jsx             # Lockscreen login form with PIN / username input
 │   │   │   └── UserProfile.jsx       # Avatar with dynamic initials generation
 │   │   └── utilities/
+│   │       ├── LandscapePrompt.jsx   # Mobile orientation detector & landscape alert prompt
+│   │       ├── Power.jsx             # Power / Sleep / Shutdown modal actions
 │   │       ├── RightClick.jsx        # Desktop context menu with refresh, view options
 │   │       └── Slider.jsx            # Lockscreen slide-down cover with date, time, trivia
 │   ├── data/
@@ -89,7 +91,7 @@ portfolio/
 │   ├── utils/
 │   │   ├── constants.js              # Default window sizes, motion configs, intervals
 │   │   └── helpers.js                # Date/time formatters, safe math evaluation, bounds calculation
-│   ├── App.js                        # App root with global context menu disabler & lazy routes
+│   ├── App.js                        # App root with global context menu disabler, landscape prompt & lazy routes
 │   ├── index.css                     # Tailwind imports, acrylic glassmorphism, keyframes
 │   └── index.js                      # React DOM entry point with analytics
 ├── brain.md                          # MASTER AI DIRECTIVE & BLUEPRINT (This file)
@@ -105,15 +107,15 @@ portfolio/
 ### 3.1 Routing & Navigation Lifecycle
 - **`/` (Root)**: Renders `Lockscreen` ([src/Pages/lockscreen.js](file:///c:/Users/Dell/OneDrive/Desktop/portfolio/src/Pages/lockscreen.js)).
   - Presents a static Windows 11 Bloom wallpaper (`/images/wallpapers/windows11.jpg`) with an acrylic glass overlay.
-  - User submits username / PIN via `Login.jsx` which stores the username in `localStorage` and navigates to `/:name` (e.g. `/Vidhitam`).
+  - User submits username / PIN via `Login.jsx` (touch-friendly Sign In button, arrow submit, or Enter key) which stores the username in `localStorage` and navigates to `/:name` (e.g. `/Vidhitam`).
 - **`/:name` (Desktop)**: Renders `Main` ([src/Pages/main.js](file:///c:/Users/Dell/OneDrive/Desktop/portfolio/src/Pages/main.js)).
-  - Mounts the desktop icon grid, Taskbar, Start Menu, right-click context menu, selection marquee, and window manager.
+  - Mounts the desktop icon grid (single-tap on touch / double-click on desktop), Taskbar, Start Menu, right-click context menu, selection marquee, and window manager.
 
 ```mermaid
 flowchart TD
     A["User Visits /"] --> B["Lockscreen (lockscreen.js)"]
     B --> C["Login Component (Login.jsx)"]
-    C -->|Submit Name/PIN| D["Set localStorage('name') & Navigate to /:name"]
+    C -->|Submit Name/PIN or Sign In| D["Set localStorage('name') & Navigate to /:name"]
     D --> E["Desktop Environment (main.js)"]
     E --> F["Taskbar & Start Menu"]
     E --> G["Desktop Icons Grid"]
@@ -129,9 +131,8 @@ flowchart TD
      menu: false,        // Slider screensaver
      start: false,       // Start Menu
      explorer: false,    // File Explorer
-     browser: false,     // Browser (Chrome/Edge)
+     browser: false,     // Browser (Chrome)
      chrome: false,
-     edge: false,
      calculator: false,  // Calculator
      vscode: false,      // VS Code
      recycle: false,     // Recycle Bin

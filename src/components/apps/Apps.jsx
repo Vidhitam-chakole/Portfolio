@@ -36,24 +36,24 @@ function Apps({ isAppOpen, toggleApp, bounds, input, isActive = false, bringToFr
           {input === "spotify" ? (
             <div
               ref={windowRef}
-              className="window bg-black h-[45rem] w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] font-semibold pointer-events-auto"
+              className="window bg-black h-[82vh] max-h-[45rem] w-[95vw] max-w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] font-semibold pointer-events-auto flex flex-col"
               onMouseDown={bringToFront}
             >
-              <div className="title-bar">
+              <div className="title-bar shrink-0">
                 <div className="text-white h-9 flex justify-between select-none">
                   <div className="m-1 ml-4 font-normal">Spotify</div>
                   <div className="flex">
                     <div
-                      className="hover:bg-neutral-800 mb-2 w-11 flex justify-center items-center text-xl"
+                      className="hover:bg-neutral-800 mb-2 w-11 flex justify-center items-center text-xl cursor-pointer"
                       onClick={() => minimizeWindow && minimizeWindow(input)}
                     >
                       <MdMinimize />
                     </div>
-                    <div className="hover:bg-neutral-800 mb-2 w-11 flex justify-center items-center text-sm">
+                    <div className="hover:bg-neutral-800 mb-2 w-11 flex justify-center items-center text-sm cursor-pointer">
                       <MdCheckBoxOutlineBlank />
                     </div>
                     <div
-                      className="hover:bg-red-700 mb-2 w-12 flex justify-center items-center text-xl"
+                      className="hover:bg-red-700 mb-2 w-12 flex justify-center items-center text-xl cursor-pointer"
                       onClick={() => toggleApp(input)}
                     >
                       <MdClose />
@@ -61,7 +61,7 @@ function Apps({ isAppOpen, toggleApp, bounds, input, isActive = false, bringToFr
                   </div>
                 </div>
               </div>
-              <div className="content text-white select-none text-center flex justify-center h-full">
+              <div className="content text-white select-none text-center flex justify-center flex-1 h-full min-h-0">
                 {contentLoaded && (
                   <iframe
                     title="Spotify"
@@ -79,7 +79,7 @@ function Apps({ isAppOpen, toggleApp, bounds, input, isActive = false, bringToFr
           ) : input === "terminal" ? (
             <div
               ref={windowRef}
-              className="window bg-neutral-800 h-[45rem] w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] pointer-events-auto"
+              className="window bg-neutral-800 h-[82vh] max-h-[45rem] w-[95vw] max-w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] pointer-events-auto flex flex-col"
               onMouseDown={bringToFront}
             >
               <div className="title-bar">

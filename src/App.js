@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoadingSpinner from "./components/shared/LoadingSpinner";
+import LandscapePrompt from "./components/utilities/LandscapePrompt";
 
 // Lazy-load route pages to reduce initial bundle size
 const Lockscreen = lazy(() => import("./Pages/lockscreen"));
@@ -22,14 +23,17 @@ function App() {
     return () => document.removeEventListener("contextmenu", handler);
   }, []);
   return (
-    <Router>
-      <Suspense fallback={<div className="flex items-center justify-center h-screen"><LoadingSpinner /></div>}>
-        <Routes>
-          <Route path="/" element={<Lockscreen />} />
-          <Route path="/:name" element={<Main />} />
-        </Routes>
-      </Suspense>
-    </Router>
+    <>
+      <LandscapePrompt />
+      <Router>
+        <Suspense fallback={<div className="flex items-center justify-center h-screen"><LoadingSpinner /></div>}>
+          <Routes>
+            <Route path="/" element={<Lockscreen />} />
+            <Route path="/:name" element={<Main />} />
+          </Routes>
+        </Suspense>
+      </Router>
+    </>
   );
 }
 

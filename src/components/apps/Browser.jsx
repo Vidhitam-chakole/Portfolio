@@ -71,7 +71,7 @@ const AddressBar = ({ name, url, setUrl }) => {
           <MdRefresh />
         </div>
       </div>
-      <div className="w-[48vw] my-1.5 rounded-xl bg-neutral-700 relative">
+      <div className="flex-1 my-1.5 rounded-xl bg-neutral-700 relative max-w-2xl mx-2">
         {isEditing ? (
           <input
             type="text"
@@ -96,7 +96,7 @@ const AddressBar = ({ name, url, setUrl }) => {
           <MdStar />
         </div>
       </div>
-      <div className="avatar placeholder flex justify-center items-center ml-6 cursor-pointer">
+      <div className="avatar placeholder flex justify-center items-center ml-2 sm:ml-6 cursor-pointer">
         <div className="bg-blue-500 text-white rounded-full w-6 h-6">
           {name && <div className="text-white text-md font-normal">{generateInitials(name)}</div>}
         </div>
@@ -136,23 +136,23 @@ function Browser({ isAppOpen, toggleBrowser, bounds, isActive = false, bringToFr
         <Draggable handle=".title-bar" nodeRef={explorerRef} bounds={bounds}>
           <div
             ref={explorerRef}
-            className="window bg-black h-[45rem] w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] pointer-events-auto"
+            className="window bg-black h-[82vh] max-h-[45rem] w-[95vw] max-w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] pointer-events-auto flex flex-col"
             onMouseDown={bringToFront}
           >
             <TitleBar toggleBrowser={handleCloseBrowser} bringToFront={bringToFront} />
-            <div className="content text-white text-center">
+            <div className="content text-white text-center flex-1 flex flex-col overflow-hidden">
               <TabBar bringToFront={bringToFront} />
               <AddressBar 
                 name={name} 
                 url={url} 
                 setUrl={setUrl}
               />
-              <div className="h-[50em]">
-                <div className="h-full w-full flex flex-col flex-grow">
+              <div className="flex-1 w-full h-full min-h-0">
+                <div className="h-full w-full flex flex-col">
                   <iframe 
                     ref={iframeRef}
                     src={url} 
-                    className="flex-grow" 
+                    className="w-full h-full flex-grow border-0" 
                     id="chrome-screen" 
                     title="Chrome Url"
                   ></iframe>

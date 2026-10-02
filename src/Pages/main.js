@@ -31,7 +31,6 @@ function Main() {
     explorer: false,
     browser: false,
     chrome: false,
-    edge: false,
     calculator: false,
     vscode: false,
     recycle: false,
@@ -78,7 +77,7 @@ function Main() {
     if (window === 'app' && input && input === 'spotify') {
       actualWindow = input;
     }
-    if (window === 'browser' && input && (input === 'chrome' || input === 'edge')) {
+    if (window === 'browser' && input && input === 'chrome') {
       actualWindow = input;
     }
 
@@ -115,7 +114,7 @@ function Main() {
         }
       }
 
-      if (actualWindow === 'chrome' || actualWindow === 'edge') {
+      if (actualWindow === 'chrome') {
         newState.browser = !wasOpen;
         if (wasOpen) {
           newState[actualWindow] = false;
@@ -188,8 +187,14 @@ function Main() {
         style={{ willChange: "transform" }}
       >
         <div
-          className="desktop-icon w-[4.5rem] flex flex-col justify-start items-center rounded hover:bg-white hover:bg-opacity-10 p-1.5"
+          className="desktop-icon w-[4.5rem] flex flex-col justify-start items-center rounded hover:bg-white hover:bg-opacity-10 active:bg-white/20 p-1.5 cursor-pointer touch-manipulation"
           onDoubleClick={() => toggleWindow(app.action, app.subAction)}
+          onClick={() => {
+            // Touch devices & small screens allow single-tap to open app
+            if (("ontouchstart" in window || navigator.maxTouchPoints > 0) && window.innerWidth <= 1024) {
+              toggleWindow(app.action, app.subAction);
+            }
+          }}
         >
           <img
             src={app.icon}
@@ -288,8 +293,8 @@ function Main() {
       return {
         left: 0,
         top: 0,
-        right: screenWidth - w,
-        bottom: screenHeight - h - 40,
+        right: Math.max(0, screenWidth - Math.min(w, screenWidth)),
+        bottom: Math.max(0, screenHeight - Math.min(h, screenHeight) - 48),
       };
     };
 

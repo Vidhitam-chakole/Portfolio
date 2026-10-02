@@ -16,8 +16,8 @@ function StartMenu({
     <>
       <section
         id="w11-start-section"
-        className={`fixed left-1/2 transform -translate-x-1/2 z-50 bg-neutral-800 w-[92%] max-w-4xl rounded-md shadow-lg ${
-          isStartOpen ? "bottom-16" : "bottom-[-800px]"
+        className={`fixed left-1/2 transform -translate-x-1/2 z-50 bg-neutral-800/95 backdrop-blur-xl w-[95%] sm:w-[92%] max-w-3xl max-h-[85vh] overflow-y-auto rounded-xl shadow-2xl border border-white/10 ${
+          isStartOpen ? "bottom-14 sm:bottom-16" : "bottom-[-900px]"
         }`}
         style={{ transition: "bottom 300ms ease" }}
       >
@@ -49,10 +49,10 @@ function StartMenu({
             <div id="second-app-container">
               <div className="app-icon">
                 <img
-                  src="https://laaouatni.github.io/w11CSS/images/edge-icon.png"
-                  alt="edge icon"
+                  src="/images/apps/chrome.png"
+                  alt="Google Chrome"
                 />
-                <span>Edge</span>
+                <span>Chrome</span>
               </div>
               <div className="app-icon">
                 <img

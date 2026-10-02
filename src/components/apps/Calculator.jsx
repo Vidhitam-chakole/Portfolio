@@ -112,22 +112,22 @@ const Calculator = ({ isAppOpen, toggleCalculator, isActive, bringToFront, minim
       onMinimize={minimizeWindow}
       bounds={bounds}
       windowRef={calculatorRef}
-      className="w-[34em] h-[50em]"
+      className="w-[92vw] max-w-[22rem] sm:max-w-[26rem] h-[82vh] max-h-[38rem] flex flex-col"
       isActive={isActive}
       bringToFront={bringToFront}
     >
-      <div className="select-none text-center flex justify-center">
-        <div className="top-[10px] bg-neutral-900 mx-auto p-20 shadow-lg text-white h-screen">
+      <div className="select-none text-center flex justify-center flex-1 overflow-y-auto">
+        <div className="bg-neutral-900 w-full p-4 sm:p-6 shadow-lg text-white flex flex-col justify-between">
           <input
             type="text"
             value={display}
-            className="w-full mb-10 px-4 py-3 text-3xl rounded-lg bg-transparent shadow-inner text-right"
+            className="w-full mb-4 sm:mb-6 px-3 py-2 sm:py-3 text-2xl sm:text-3xl rounded-lg bg-black/40 border border-neutral-700/50 shadow-inner text-right"
             placeholder="0"
             disabled
             aria-label="Calculator display"
           />
           
-          <div className="grid grid-cols-4 gap-3 text-2xl font-light">
+          <div className="grid grid-cols-4 gap-2 sm:gap-3 text-lg sm:text-xl font-light">
             {/* Calculator buttons */}
             {buttons.map((button, index) => (
               <CalculatorButton

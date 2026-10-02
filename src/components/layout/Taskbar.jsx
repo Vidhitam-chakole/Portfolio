@@ -60,16 +60,12 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
   }, [windows.explorer, minimizeWindow, toggleExplorer]);
 
   const handleChromeClick = useCallback(() => {
-    minimizeWindow && minimizeWindow('chrome');
-  }, [minimizeWindow]);
-
-  const handleEdgeClick = useCallback(() => {
-    if (windows.edge) {
-      minimizeWindow && minimizeWindow('edge');
+    if (windows.chrome) {
+      minimizeWindow && minimizeWindow('chrome');
     } else {
-      toggleWindow && toggleWindow('browser', 'edge');
+      toggleWindow && toggleWindow('browser', 'chrome');
     }
-  }, [windows.edge, minimizeWindow, toggleWindow]);
+  }, [windows.chrome, minimizeWindow, toggleWindow]);
 
   const handleCalculatorClick = useCallback(() => {
     minimizeWindow && minimizeWindow('calculator');
@@ -92,12 +88,12 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
   }, [minimizeWindow]);
 
   return (
-    <div className="fixed bottom-0 flex justify-between w-full h-12 bg-[#202020] border-t border-neutral-700 select-none pointer-events-auto text-white z-40 py-0.5">
+    <div className="fixed bottom-0 flex justify-between items-center w-full h-11 sm:h-12 bg-[#202020]/95 backdrop-blur-md border-t border-neutral-700/80 select-none pointer-events-auto text-white z-40 py-0.5 px-1 sm:px-3">
       {/* Left spacer for centering (responsive) */}
-      <div className="w-12 sm:w-[15%]" aria-hidden="true" />
+      <div className="hidden sm:block sm:w-12 md:w-[10%]" aria-hidden="true" />
 
       {/* Center - App icons */}
-      <nav className="flex justify-center items-center gap-1 sm:gap-2" role="navigation" aria-label="Taskbar applications">
+      <nav className="flex justify-center items-center gap-1 sm:gap-2 overflow-x-auto max-w-full" role="navigation" aria-label="Taskbar applications">
         <TaskbarButton
           onClick={toggleStart}
           icon="/images/apps/windows.png"
@@ -110,19 +106,11 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
           isActive={windows.explorer}
         />
         <TaskbarButton
-          onClick={handleEdgeClick}
-          icon="/images/apps/edge.png"
-          alt="Microsoft Edge"
-          isActive={windows.edge}
+          onClick={handleChromeClick}
+          icon="/images/apps/chrome.png"
+          alt="Google Chrome"
+          isActive={windows.chrome}
         />
-        {windows.chrome && (
-          <TaskbarButton
-            onClick={handleChromeClick}
-            icon="/images/apps/chrome.png"
-            alt="Google Chrome"
-            isActive={true}
-          />
-        )}
         {windows.calculator && (
           <TaskbarButton
             onClick={handleCalculatorClick}
@@ -163,44 +151,43 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
             isActive={true}
           />
         )}
-        {/* HelpMeEarn removed */}
       </nav>
 
       {/* Right - System tray */}
-      <div className="flex items-center h-full" role="region" aria-label="System tray">
-        {/* Expand button */}
+      <div className="flex items-center h-full gap-0.5 sm:gap-1" role="region" aria-label="System tray">
+        {/* Expand button (hidden on extra small screens) */}
         <button
           type="button"
-          className="flex justify-center items-center h-full px-2 hover:bg-white/10 transition-colors duration-150 rounded-lg cursor-pointer"
+          className="hidden sm:flex justify-center items-center h-full px-1.5 hover:bg-white/10 transition-colors duration-150 rounded-lg cursor-pointer"
           aria-label="Show hidden icons"
         >
           <FaChevronUp className="text-xs" />
         </button>
 
         {/* Network, volume, battery icons */}
-        <div className="flex items-center h-full px-2 sm:px-3 hover:bg-white/10 transition-colors duration-150 gap-3 rounded-lg">
+        <div className="flex items-center h-full px-1.5 sm:px-2.5 hover:bg-white/10 transition-colors duration-150 gap-2 sm:gap-2.5 rounded-lg">
           <SystemTrayIcon icon={FaWifi} />
           <SystemTrayIcon icon={FaVolumeUp} />
-          <SystemTrayIcon icon={FaBatteryFull} />
+          <SystemTrayIcon icon={FaBatteryFull} className="hidden xs:inline-block" />
         </div>
 
         {/* Clock and notifications */}
         <button
           type="button"
-          className="flex items-center h-full px-2 sm:px-3 hover:bg-white/10 transition-colors duration-150 rounded-lg cursor-pointer"
+          className="flex items-center h-full px-1.5 sm:px-2.5 hover:bg-white/10 transition-colors duration-150 rounded-lg cursor-pointer"
           aria-label="Notifications and calendar"
         >
-          <time className="flex flex-col items-end text-[11px] leading-tight mr-2">
+          <time className="flex flex-col items-end text-[10px] sm:text-[11px] leading-tight mr-1 sm:mr-2">
             <span>{formatTime(currentTime)}</span>
-            <span>{formatDate(currentTime)}</span>
+            <span className="hidden xs:inline">{formatDate(currentTime)}</span>
           </time>
-          <FaBell className="text-sm" aria-hidden="true" />
+          <FaBell className="text-xs sm:text-sm" aria-hidden="true" />
         </button>
 
         {/* Show desktop button */}
         <button
           type="button"
-          className="group w-3 h-full flex justify-center items-center transition-colors duration-150 cursor-pointer"
+          className="group w-2 sm:w-3 h-full flex justify-center items-center transition-colors duration-150 cursor-pointer"
           aria-label="Show desktop"
         >
           <span className="hidden group-hover:block text-neutral-400 text-md pointer-events-none" aria-hidden="true">

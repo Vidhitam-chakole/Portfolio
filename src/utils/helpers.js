@@ -22,17 +22,19 @@ export const formatTime = (time) => {
  * Calculate bounds for draggable windows
  * @param {number} windowWidth - Window width in pixels
  * @param {number} windowHeight - Window height in pixels
+ * @param {number} [viewportWidth] - Optional viewport width
+ * @param {number} [viewportHeight] - Optional viewport height
  * @returns {Object} Bounds object with left, top, right, bottom
  */
-export const calculateWindowBounds = (windowWidth, windowHeight) => {
-  const screenWidth = window.innerWidth;
-  const screenHeight = window.innerHeight;
+export const calculateWindowBounds = (windowWidth, windowHeight, viewportWidth, viewportHeight) => {
+  const screenWidth = typeof viewportWidth === "number" ? viewportWidth : window.innerWidth;
+  const screenHeight = typeof viewportHeight === "number" ? viewportHeight : window.innerHeight;
   
   return {
     left: 0,
     top: 0,
-    right: screenWidth - windowWidth,
-    bottom: screenHeight - windowHeight - 40,
+    right: Math.max(0, screenWidth - Math.min(windowWidth, screenWidth)),
+    bottom: Math.max(0, screenHeight - Math.min(windowHeight, screenHeight) - 48),
   };
 };
 

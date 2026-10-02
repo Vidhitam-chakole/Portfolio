@@ -17,7 +17,7 @@ function VsCode({ isAppOpen, toggleVsCode, bounds, isActive = false, bringToFron
       <Draggable handle=".title-bar" nodeRef={windowRef} bounds={bounds}>
         <div
           ref={windowRef}
-          className="window bg-black h-[45rem] w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] font-semibold pointer-events-auto"
+          className="window bg-black h-[82vh] max-h-[45rem] w-[95vw] max-w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] font-semibold pointer-events-auto flex flex-col"
           onMouseDown={bringToFront}
         >
           <div className="title-bar flex justify-between items-center bg-neutral-800 text-white h-9 select-none">

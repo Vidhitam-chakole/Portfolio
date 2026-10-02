@@ -29,10 +29,10 @@ const RecycleBin = ({ isRecycleOpen, toggleRecycle, bounds, isActive = false, br
       <Draggable handle=".title-bar" nodeRef={explorerRef} bounds={bounds}>
         <div
           ref={explorerRef}
-          className="window bg-black h-[39rem] w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] pointer-events-auto"
+          className="window bg-black h-[82vh] max-h-[39rem] w-[95vw] max-w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] pointer-events-auto flex flex-col"
           onMouseDown={bringToFront}
         >
-          <div className="title-bar" onMouseDown={bringToFront}>
+          <div className="title-bar shrink-0" onMouseDown={bringToFront}>
             <div className="text-white h-9 w-full flex justify-end select-none">
               <button
                 type="button"
