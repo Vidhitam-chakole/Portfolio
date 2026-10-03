@@ -163,7 +163,7 @@ const Explorer = ({ isExplorerOpen, toggleExplorer, aboutMe, bounds, isActive = 
       <Draggable handle=".title-bar" nodeRef={explorerRef} bounds={bounds}>
         <div
           ref={explorerRef}
-          className="window bg-black h-[82vh] max-h-[39rem] w-[95vw] max-w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] pointer-events-auto flex flex-col"
+          className="window bg-black h-[calc(100vh-3rem)] w-screen sm:h-[82vh] sm:max-h-[39rem] sm:w-[95vw] sm:max-w-[70.5rem] sm:rounded-xl rounded-none overflow-hidden border-neutral-700 sm:border-[1.5px] border-0 pointer-events-auto flex flex-col"
           onMouseDown={bringToFront}
         >
           <div className="title-bar bg-neutral-900 text-white h-8 w-full flex justify-end items-center select-none shrink-0" onMouseDown={bringToFront}>
