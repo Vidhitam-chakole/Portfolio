@@ -58,7 +58,6 @@ function VsCode({
   const [activeActivityTab, setActiveActivityTab] = useState("explorer");
 
   const selectedRepo = githubRepos.find((r) => r.id === selectedRepoId);
-  const selectedFileInfo = selectedRepo ? getFileInfo(selectedRepo) : null;
 
   const handleSelectFile = (id) => {
     setSelectedRepoId(id);
@@ -247,7 +246,6 @@ function VsCode({
                     {/* Repository README Files List */}
                     <div className="ml-3 flex flex-col border-l border-[#333333]">
                       {githubRepos.map((repo) => {
-                        const fileInfo = getFileInfo(repo);
                         const isSelected = selectedRepoId === repo.id;
                         return (
                           <div
