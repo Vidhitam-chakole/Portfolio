@@ -1,284 +1,380 @@
 import React from "react";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaInstagram,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaBriefcase,
+  FaGraduationCap,
+  FaCertificate,
+  FaPhoneAlt,
+} from "react-icons/fa";
 import {
   profileDescription,
   educationExperience,
-  githubRepos,
-  skills,
+  workExperienceTemplate,
+  certifications,
+  technicalSkills,
   ownerName,
   ownerInitials,
+  ownerHeadline,
+  ownerLocation,
+  socialMediaLinks,
 } from "../../data/data";
-
-const ProjectCard = ({ repo }) => {
-  const renderSkills = () => {
-    return repo.techUsed.map((tech, index) => (
-      <div
-        key={index}
-        className="bg-white bg-opacity-20 rounded-md px-2 py-1 text-xs"
-      >
-        {tech}
-      </div>
-    ));
-  };
-
-  return (
-    <div className="bg-neutral-900/80 rounded-md px-4 pt-3 hover:translate-x-1 hover:-translate-y-1 duration-300 text-selection">
-      <div className="flex items-center justify-between">
-        {repo.githubLink ? (
-          <a
-            href={repo.githubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View GitHub repository"
-          >
-            <FaGithub size={30} />
-          </a>
-        ) : (
-          <span />
-        )}
-        {repo.liveURL ? (
-          <a
-            href={repo.liveURL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Visit live site"
-          >
-            <FaExternalLinkAlt size={15} />
-          </a>
-        ) : (
-          <span />
-        )}
-      </div>
-      <h3 className="font-bold mt-6">{repo.name}</h3>
-      <p className="text-neutral-700 mt-4 text-sm">{repo.description}</p>
-      <div className="flex items-center mt-4 gap-2 flex-wrap">
-        {renderSkills()}
-      </div>
-    </div>
-  );
-};
-
-const Skill = ({ icon, name, size }) => (
-  <div
-    className={`w-[${
-      size === 48 ? "6em" : "5em"
-    }] h-24 flex flex-col justify-center items-center rounded-md hover:bg-white hover:bg-opacity-20 p-2`}
-  >
-    {icon ? React.cloneElement(icon, { size }) : null}
-    <div className="text-balance text-center text-sm select-none pt-2">
-      {name}
-    </div>
-  </div>
-);
-
-const SkillsList = ({ x, y }) => (
-  <div className="flex flex-wrap gap-2">
-    <>
-      {skills.slice(x, y).map((skill) => (
-        <Skill key={skill.key} icon={skill.icon} name={skill.name} size={48} />
-      ))}
-    </>
-  </div>
-);
 
 const AboutMe = ({ page, handleDivClick, expandedDiv }) => {
   const renderPageContent = () => {
     switch (page) {
       case "About Me":
         return (
-          <div className="hero min-h-auto justify-start py-4">
-            <div className="hero-content flex-col lg:flex-row items-center gap-6">
+          <div className="space-y-6 py-2 px-2 max-w-4xl">
+            {/* Top Profile Card */}
+            <div className="bg-neutral-900/90 border border-neutral-800 rounded-xl p-5 sm:p-6 flex flex-col md:flex-row items-center md:items-start gap-6 shadow-xl">
               <div
-                className="rounded-2xl shadow-2xl w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-neutral-800 flex items-center justify-center text-4xl sm:text-5xl md:text-6xl font-bold select-none border border-neutral-700 shrink-0"
-                aria-label="Profile placeholder"
+                className="rounded-2xl w-28 h-28 sm:w-36 sm:h-36 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 flex items-center justify-center text-4xl sm:text-5xl font-bold text-white select-none border border-white/20 shrink-0 shadow-lg"
+                aria-label="Profile Initials"
               >
                 {ownerInitials}
               </div>
-              <div className="text-center lg:text-left">
-                <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold">{ownerName}</h1>
-                <p className="py-3 sm:py-6 text-sm sm:text-base text-neutral-300">{profileDescription}</p>
+
+              <div className="text-center md:text-left flex-1 space-y-2">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                  <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                    {ownerName}
+                  </h1>
+                  {ownerLocation && (
+                    <div className="flex items-center justify-center md:justify-start gap-1 text-xs text-neutral-400">
+                      <FaMapMarkerAlt className="text-red-400" />
+                      <span>{ownerLocation}</span>
+                    </div>
+                  )}
+                </div>
+
+                <p className="text-sm font-medium text-blue-400 leading-snug">
+                  {ownerHeadline}
+                </p>
+
+                {/* Official Social Media Links Bar */}
+                <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 pt-2">
+                  {/* LinkedIn */}
+                  {socialMediaLinks.linkedin && (
+                    <a
+                      href={socialMediaLinks.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0A66C2]/15 hover:bg-[#0A66C2] text-[#0A66C2] hover:text-white border border-[#0A66C2]/40 rounded-lg text-xs font-semibold transition-all duration-150"
+                      title="LinkedIn Profile"
+                    >
+                      <FaLinkedin size={15} />
+                      <span>LinkedIn</span>
+                    </a>
+                  )}
+
+                  {/* GitHub */}
+                  {socialMediaLinks.github && (
+                    <a
+                      href={socialMediaLinks.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-white border border-neutral-700 rounded-lg text-xs font-semibold transition-all duration-150"
+                      title="GitHub Profile"
+                    >
+                      <FaGithub size={15} />
+                      <span>GitHub</span>
+                    </a>
+                  )}
+
+                  {/* Instagram */}
+                  {socialMediaLinks.instagram && (
+                    <a
+                      href={socialMediaLinks.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-[#E4405F]/15 hover:bg-[#E4405F] text-[#E4405F] hover:text-white border border-[#E4405F]/40 rounded-lg text-xs font-semibold transition-all duration-150"
+                      title="Instagram Profile"
+                    >
+                      <FaInstagram size={15} />
+                      <span>Instagram</span>
+                    </a>
+                  )}
+
+                  {/* Email */}
+                  {socialMediaLinks.email && (
+                    <a
+                      href={socialMediaLinks.email}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-[#EA4335]/15 hover:bg-[#EA4335] text-[#EA4335] hover:text-white border border-[#EA4335]/40 rounded-lg text-xs font-semibold transition-all duration-150"
+                      title="Send Email"
+                    >
+                      <FaEnvelope size={14} />
+                      <span>Email</span>
+                    </a>
+                  )}
+
+                  {/* Phone */}
+                  {socialMediaLinks.phone && (
+                    <a
+                      href={socialMediaLinks.phone}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/15 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/40 rounded-lg text-xs font-semibold transition-all duration-150"
+                      title="Phone Contact"
+                    >
+                      <FaPhoneAlt size={12} />
+                      <span>Contact</span>
+                    </a>
+                  )}
+                </div>
               </div>
+            </div>
+
+            {/* Summary / Bio Narrative */}
+            <div className="bg-neutral-900/90 border border-neutral-800 rounded-xl p-5 sm:p-6 space-y-3 shadow-md">
+              <h2 className="text-lg font-bold text-white border-b border-neutral-800 pb-2">
+                Summary & Perspective
+              </h2>
+              <div className="text-neutral-300 text-sm leading-relaxed space-y-2.5">
+                {Array.isArray(profileDescription) ? (
+                  profileDescription.map((para, idx) => (
+                    <p key={idx}>{para}</p>
+                  ))
+                ) : (
+                  <p>{profileDescription}</p>
+                )}
+              </div>
+            </div>
+
+            {/* Certifications Card */}
+            {certifications && certifications.length > 0 && (
+              <div className="bg-neutral-900/90 border border-neutral-800 rounded-xl p-5 sm:p-6 space-y-3 shadow-md">
+                <h2 className="text-lg font-bold text-white border-b border-neutral-800 pb-2 flex items-center gap-2">
+                  <FaCertificate className="text-yellow-400" />
+                  <span>Certifications & Specialized Training</span>
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                  {certifications.map((cert) => (
+                    <div
+                      key={cert.key}
+                      className="bg-neutral-800/70 border border-neutral-700/60 p-3.5 rounded-lg space-y-1"
+                    >
+                      <div className="text-xs font-bold text-white">{cert.title}</div>
+                      <div className="text-xs text-neutral-400">{cert.subtitle}</div>
+                      <div className="text-[11px] font-medium text-blue-400 pt-1">{cert.issuer}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        );
+
+      case "Experience":
+        return (
+          <div className="max-w-4xl py-2 px-2 space-y-4">
+            <div className="flex items-center gap-2 border-b border-neutral-800 pb-2">
+              <FaBriefcase className="text-blue-400 text-lg" />
+              <h2 className="text-xl font-bold text-white">Experience & Leadership</h2>
+            </div>
+
+            <div className="space-y-4">
+              {workExperienceTemplate.map((item) => (
+                <div
+                  key={item.key}
+                  className="bg-neutral-900/90 border border-neutral-800 rounded-xl p-5 hover:border-neutral-700 transition-colors shadow-md"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                    <div>
+                      <h3 className="text-base font-bold text-white">{item.company}</h3>
+                      <div className="text-sm font-semibold text-blue-400">{item.designation}</div>
+                    </div>
+                    <div className="text-xs font-mono text-neutral-400 bg-neutral-800/80 px-2.5 py-1 rounded-md self-start sm:self-auto">
+                      {item.duration}
+                    </div>
+                  </div>
+
+                  {item.location && (
+                    <div className="flex items-center gap-1 text-xs text-neutral-500 mt-1">
+                      <FaMapMarkerAlt size={11} />
+                      <span>{item.location}</span>
+                    </div>
+                  )}
+
+                  <ul className="mt-3 space-y-1 text-xs sm:text-sm text-neutral-300 list-disc list-inside">
+                    {item.description.map((desc, i) => (
+                      <li key={i}>{desc}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         );
+
       case "Education":
         if (!educationExperience.length) {
-          return (
-            <div className="text-neutral-400 p-8">No education listed.</div>
-          );
+          return <div className="text-neutral-400 p-8">No education listed.</div>;
         }
         return (
-          <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical my-8">
-            {educationExperience.map((item, index) => (
-              <li key={item.key ?? index}>
-                {index > 0 && <hr className="bg-gray-500" />}
-                <div className="timeline-middle">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="h-5 w-5"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
+          <div className="max-w-4xl py-2 px-2 space-y-4">
+            <div className="flex items-center gap-2 border-b border-neutral-800 pb-2">
+              <FaGraduationCap className="text-purple-400 text-xl" />
+              <h2 className="text-xl font-bold text-white">Education History</h2>
+            </div>
+
+            <div className="space-y-4">
+              {educationExperience.map((item, index) => (
                 <div
-                  className={`${
-                    index % 2 === 0 ? "timeline-end" : "timeline-start md:text-end"
-                  } mb-10`}
+                  key={item.key ?? index}
+                  className="bg-neutral-900/90 border border-neutral-800 rounded-xl p-5 hover:border-neutral-700 transition-colors shadow-md"
                 >
-                  <time className="font-mono text-lg italic">
-                    {item.graduation}
-                  </time>
-                  <div className="text-xl font-bold font-3xl">
-                    {item.institution}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                    <div>
+                      <h3 className="text-base font-bold text-white">{item.institution}</h3>
+                      <div className="text-sm font-semibold text-purple-300">{item.degree}</div>
+                    </div>
+                    <div className="text-xs font-mono text-neutral-400 bg-neutral-800/80 px-2.5 py-1 rounded-md self-start sm:self-auto">
+                      {item.graduation || item.duration}
+                    </div>
                   </div>
-                  {item.degree}
+
+                  {item.location && (
+                    <div className="flex items-center gap-1 text-xs text-neutral-500 mt-1">
+                      <FaMapMarkerAlt size={11} />
+                      <span>{item.location}</span>
+                    </div>
+                  )}
                 </div>
-                <hr className="bg-gray-500" />
-              </li>
-            ))}
-          </ul>
+              ))}
+            </div>
+          </div>
         );
+
       case "Skills":
         return (
-          <div className="main-container flex h-full relative p-2">
-            {expandedDiv === 0 && (
-              <div className="flex flex-wrap gap-3">
-                <div
-                  className="w-[5em] h-28 flex flex-col pt-2 items-center rounded-md hover:bg-white hover:bg-opacity-20 cursor-pointer active:bg-white/30"
-                  onDoubleClick={() => handleDivClick(1)}
-                  onClick={() => handleDivClick(1)}
-                >
-                  <img
-                    src="/images/apps/folder.png"
-                    alt="Technical"
-                    className="w-12 h-12"
-                  />
-                  <div className="text-balance text-center text-xs sm:text-sm select-none pt-2">
-                    Technical Skills
-                  </div>
-                </div>
+          <div className="max-w-4xl py-2 px-2 space-y-4">
+            <div className="flex items-center gap-2 border-b border-neutral-800 pb-2">
+              <h2 className="text-xl font-bold text-white">Skills & Competencies</h2>
+            </div>
 
-                <div
-                  className="w-[5em] h-28 flex flex-col pt-2 items-center rounded-md hover:bg-white hover:bg-opacity-20 cursor-pointer active:bg-white/30"
-                  onDoubleClick={() => handleDivClick(2)}
-                  onClick={() => handleDivClick(2)}
-                >
-                  <img
-                    src="/images/apps/folder.png"
-                    alt="Soft"
-                    className="w-12 h-12"
-                  />
-                  <div className="text-balance text-center text-xs sm:text-sm select-none pt-2">
-                    Soft Skills
-                  </div>
-                </div>
-
-                <div
-                  className="w-[5em] h-28 flex flex-col pt-2 items-center rounded-md hover:bg-white hover:bg-opacity-20 cursor-pointer active:bg-white/30"
-                  onDoubleClick={() => handleDivClick(3)}
-                  onClick={() => handleDivClick(3)}
-                >
-                  <img
-                    src="/images/apps/folder.png"
-                    alt="Design"
-                    className="w-12 h-12"
-                  />
-                  <div className="text-balance text-center text-xs sm:text-sm select-none pt-2">
-                    Design Skills
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div
+                className={`p-4 rounded-xl border cursor-pointer transition-all ${
+                  expandedDiv === 0 || expandedDiv === 1
+                    ? "bg-neutral-900 border-blue-500/50"
+                    : "bg-neutral-900/60 border-neutral-800 hover:border-neutral-700"
+                }`}
+                onClick={() => handleDivClick(1)}
+              >
+                <div className="flex items-center gap-3">
+                  <img src="/images/apps/folder.png" alt="Technical" className="w-10 h-10" />
+                  <div>
+                    <div className="font-bold text-white text-sm">Technical & AI</div>
+                    <div className="text-xs text-neutral-400">RAG, MCP, Web, Python</div>
                   </div>
                 </div>
               </div>
-            )}
 
-            {expandedDiv === 1 && (
-              <div className="flex absolute top-0 gap-2">
-                {skills.length ? (
-                  <SkillsList x={0} y={skills.length} />
-                ) : (
-                  <div className="text-neutral-400 p-4">No skills listed.</div>
-                )}
-              </div>
-            )}
-
-            {expandedDiv === 2 && (
-              <div className="flex absolute top-0 gap-1">
-                <div className="w-[6.5em] h-28 flex flex-col pt-2 items-center rounded-md hover:bg-white hover:bg-opacity-20">
-                  <img
-                    src="/images/folders/communication.png"
-                    alt="Communication"
-                    className="w-12 h-12"
-                  />
-                  <div className="text-pretty text-center text-sm select-none pt-2">
-                    Communication
-                  </div>
-                </div>
-                <div className="w-[6em] h-28 flex flex-col pt-2 items-center rounded-md hover:bg-white hover:bg-opacity-20">
-                  <img
-                    src="/images/folders/teamwork.png"
-                    alt="Teamwork"
-                    className="w-12 h-12"
-                  />
-                  <div className="text-pretty text-center text-sm select-none pt-2">
-                    Teamwork
-                  </div>
-                </div>
-                <div className="w-[5em] h-28 flex flex-col pt-2 items-center rounded-md hover:bg-white hover:bg-opacity-20">
-                  <img
-                    src="/images/folders/problem.png"
-                    alt="Problem"
-                    className="w-12 h-12"
-                  />
-                  <div className="text-pretty text-center text-sm select-none pt-2">
-                    Problem Solving
-                  </div>
-                </div>
-                <div className="w-[6em] h-28 flex flex-col justify-center items-center rounded-md hover:bg-white hover:bg-opacity-20">
-                  <img
-                    src="/images/folders/management.png"
-                    alt="Project"
-                    className="w-12 h-12"
-                  />
-                  <div className="text-pretty text-center text-sm select-none pt-2">
-                    Project Management
+              <div
+                className={`p-4 rounded-xl border cursor-pointer transition-all ${
+                  expandedDiv === 2
+                    ? "bg-neutral-900 border-blue-500/50"
+                    : "bg-neutral-900/60 border-neutral-800 hover:border-neutral-700"
+                }`}
+                onClick={() => handleDivClick(2)}
+              >
+                <div className="flex items-center gap-3">
+                  <img src="/images/folders/teamwork.png" alt="Soft Skills" className="w-10 h-10" />
+                  <div>
+                    <div className="font-bold text-white text-sm">Soft Skills & Leadership</div>
+                    <div className="text-xs text-neutral-400">Leadership, Storytelling</div>
                   </div>
                 </div>
               </div>
-            )}
 
-            {expandedDiv === 3 && (
-              <div className="flex absolute top-0 gap-2">
-                <div className="text-neutral-400 p-4">No skills listed.</div>
+              <div
+                className={`p-4 rounded-xl border cursor-pointer transition-all ${
+                  expandedDiv === 3
+                    ? "bg-neutral-900 border-blue-500/50"
+                    : "bg-neutral-900/60 border-neutral-800 hover:border-neutral-700"
+                }`}
+                onClick={() => handleDivClick(3)}
+              >
+                <div className="flex items-center gap-3">
+                  <img src="/images/folders/management.png" alt="Certifications" className="w-10 h-10" />
+                  <div>
+                    <div className="font-bold text-white text-sm">Certifications</div>
+                    <div className="text-xs text-neutral-400">Red Hat, C#, AWS</div>
+                  </div>
+                </div>
               </div>
-            )}
+            </div>
+
+            {/* Skills Content Display */}
+            <div className="bg-neutral-900/90 border border-neutral-800 rounded-xl p-5">
+              {expandedDiv === 2 ? (
+                <div className="space-y-3">
+                  <h3 className="font-bold text-white text-sm">Interpersonal & Leadership Skills</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {[
+                      { name: "Volunteer Coordination", icon: "teamwork.png" },
+                      { name: "Creative Writing & Books", icon: "communication.png" },
+                      { name: "Video & Storytelling", icon: "gallery.png" },
+                      { name: "Problem Solving", icon: "problem.png" },
+                      { name: "Team Leadership", icon: "management.png" },
+                      { name: "Public Communication", icon: "communication.png" },
+                    ].map((s, idx) => (
+                      <div
+                        key={idx}
+                        className="bg-neutral-800/70 border border-neutral-700/60 rounded-lg p-3 flex flex-col items-center text-center gap-2"
+                      >
+                        <img src={`/images/folders/${s.icon}`} alt={s.name} className="w-8 h-8" />
+                        <span className="text-xs font-medium text-neutral-200">{s.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : expandedDiv === 3 ? (
+                <div className="space-y-3">
+                  <h3 className="font-bold text-white text-sm">Certified Credentials</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {certifications.map((c) => (
+                      <div key={c.key} className="bg-neutral-800/80 border border-neutral-700 p-3.5 rounded-lg space-y-1">
+                        <div className="text-xs font-bold text-yellow-400">{c.title}</div>
+                        <div className="text-xs text-neutral-300">{c.subtitle}</div>
+                        <div className="text-[11px] text-neutral-500">{c.issuer}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <h3 className="font-bold text-white text-sm">Technical & Engineering Stack</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {technicalSkills.map((tech, idx) => (
+                      <div
+                        key={idx}
+                        className="bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 px-3.5 py-1.5 rounded-lg text-xs font-medium text-neutral-200 flex items-center gap-2"
+                      >
+                        <span className="w-2 h-2 rounded-full bg-blue-400"></span>
+                        <span>{tech.name}</span>
+                        <span className="text-[10px] text-neutral-500 font-mono">({tech.category})</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         );
-      case "My Stuffs":
-        return (
-          <div className="w-full h-full overflow-y-auto p-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#666 transparent' }}>
-            {githubRepos.length ? (
-              <div className="grid sm:grid-cols-2 gap-2">
-                {githubRepos.map((repo, index) => (
-                  <ProjectCard key={index} repo={repo} />
-                ))}
-              </div>
-            ) : (
-              <div className="text-neutral-400 p-8">No projects listed.</div>
-            )}
-          </div>
-        );
+
       default:
         return "404 not found";
     }
   };
 
   return (
-    <main className="h-full max-h-[calc(82vh-7rem)] w-full ml-2.5 mt-2 overflow-y-auto pr-3 pb-16" style={{ scrollbarWidth: 'thin', scrollbarColor: '#666 transparent' }}>
+    <main
+      className="h-full max-h-[calc(82vh-7rem)] w-full ml-2.5 mt-2 overflow-y-auto pr-3 pb-16"
+      style={{ scrollbarWidth: "thin", scrollbarColor: "#666 transparent" }}
+    >
       {renderPageContent()}
     </main>
   );

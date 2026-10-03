@@ -188,10 +188,17 @@ function Main() {
       >
         <div
           className="desktop-icon w-[4.5rem] flex flex-col justify-start items-center rounded hover:bg-white hover:bg-opacity-10 active:bg-white/20 p-1.5 cursor-pointer touch-manipulation"
-          onDoubleClick={() => toggleWindow(app.action, app.subAction)}
           onClick={() => {
-            // Touch devices & small screens allow single-tap to open app
-            if (("ontouchstart" in window || navigator.maxTouchPoints > 0) && window.innerWidth <= 1024) {
+            if (app.url) {
+              window.open(app.url, "_blank", "noopener,noreferrer");
+            } else {
+              toggleWindow(app.action, app.subAction);
+            }
+          }}
+          onDoubleClick={() => {
+            if (app.url) {
+              window.open(app.url, "_blank", "noopener,noreferrer");
+            } else {
               toggleWindow(app.action, app.subAction);
             }
           }}
@@ -199,7 +206,7 @@ function Main() {
           <img
             src={app.icon}
             alt={app.name}
-            className={app.size}
+            className={app.size || "w-10 h-10"}
             onDragStart={(e) => e.preventDefault()}
             style={{ imageRendering: "crisp-edges" }}
           />
@@ -349,35 +356,6 @@ function Main() {
     };
   }, [videoWallpaper]);
 
-  // Try to enter fullscreen once when the main page loads and
-  // again on the first user click for a more immersive experience.
-  useEffect(() => {
-    const el = document.documentElement;
-
-    const requestFullscreenSafely = () => {
-      if (!document.fullscreenElement && el.requestFullscreen) {
-        el.requestFullscreen().catch(() => {
-          // Ignore failures (e.g., browser blocking without user gesture)
-        });
-      }
-    };
-
-    // Attempt immediately on mount (may be blocked but harmless)
-    requestFullscreenSafely();
-
-    // Also try on the first click anywhere in the window
-    const handleFirstClick = () => {
-      requestFullscreenSafely();
-      window.removeEventListener("click", handleFirstClick);
-    };
-
-    window.addEventListener("click", handleFirstClick);
-
-    return () => {
-      window.removeEventListener("click", handleFirstClick);
-    };
-  }, []);
-
   // Render desktop immediately once critical icons are ready (audio preloads in background)
   if (!iconsLoaded) {
     return (
@@ -446,7 +424,7 @@ function Main() {
           <div className="pointer-events-auto">
             <RightClick option={true} />
           </div>
-          <div className="grid grid-cols-1 auto-rows-min gap-1 absolute top-2 left-2 pointer-events-auto">
+          <div className="flex flex-col flex-wrap max-h-[calc(100vh-3.5rem)] content-start gap-1 absolute top-2 left-2 pointer-events-auto">
             {desktopIcons}
           </div>
           <div className="absolute right-3 top-2">

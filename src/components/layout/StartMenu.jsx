@@ -148,9 +148,9 @@ function StartMenu({
               <div className="app-icon">
                 <img
                   src="https://laaouatni.github.io/w11CSS/images/vs-code.ico"
-                  alt="vs code icon by microsoft"
+                  alt="My Projects icon"
                 />
-                <span>VS code</span>
+                <span>My Projects</span>
               </div>
               <div className="app-icon">
                 <img
@@ -189,11 +189,11 @@ function StartMenu({
                 <div>
                   <img
                     src="https://laaouatni.github.io/w11CSS/images/vs-code.ico"
-                    alt="VS code icon"
+                    alt="My Projects icon"
                   />
                 </div>
                 <div>
-                  <div>VS Code</div>
+                  <div>My Projects</div>
                   <div>Recently added</div>
                 </div>
               </div>

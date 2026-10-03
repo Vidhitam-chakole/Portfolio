@@ -73,10 +73,12 @@ export default function Torch({ input, setInput }) {
     });
   };
 
+  if (!showIntermediate && !showTorch) return null;
+
   return (
-    <main className="cursor-custom w-full h-full">
+    <main className="cursor-custom w-full h-full pointer-events-none">
       {showIntermediate && (
-        <div className="w-full h-screen bg-white absolute top-0 z-50 flex justify-center items-center text-black font-bold text-5xl flex-col">
+        <div className="w-full h-screen bg-white absolute top-0 z-50 flex justify-center items-center text-black font-bold text-5xl flex-col pointer-events-auto">
           why would you close the window :C
           <span className="block">
             now find the switch and open the window AGAIN!!!

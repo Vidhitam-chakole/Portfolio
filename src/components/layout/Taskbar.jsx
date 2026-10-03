@@ -123,7 +123,7 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
           <TaskbarButton
             onClick={handleVsCodeClick}
             icon="https://laaouatni.github.io/w11CSS/images/vs-code.ico"
-            alt="VS Code"
+            alt="My Projects"
             isActive={true}
           />
         )}

@@ -20,9 +20,9 @@ import {
 
 const NAVIGATION_ITEMS = [
   { id: 'About Me', label: 'About Me', icon: 'me.png' },
+  { id: 'Experience', label: 'Experience', icon: 'resume.png' },
   { id: 'Education', label: 'Education', icon: 'edu.png' },
   { id: 'Skills', label: 'Skills', icon: 'skills.png' },
-  { id: 'My Stuffs', label: 'My Stuffs', icon: 'projects.png' },
 ];
 
 const QUICK_ACCESS_FOLDERS = [
