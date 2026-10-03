@@ -88,7 +88,7 @@ function VsCode({
       <Draggable handle=".title-bar" nodeRef={windowRef} bounds={bounds}>
         <div
           ref={windowRef}
-          className="window bg-[#1e1e1e] h-[84vh] max-h-[48rem] w-[96vw] max-w-[72rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] font-sans pointer-events-auto flex flex-col shadow-2xl"
+          className="window bg-[#1e1e1e] h-[calc(100vh-3rem)] w-screen sm:h-[84vh] sm:max-h-[48rem] sm:w-[96vw] sm:max-w-[72rem] sm:rounded-xl rounded-none overflow-hidden border-neutral-700 sm:border-[1.5px] border-0 font-sans pointer-events-auto flex flex-col shadow-2xl"
           onMouseDown={bringToFront}
         >
           {/* Top Title Bar */}
