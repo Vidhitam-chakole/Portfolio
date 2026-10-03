@@ -40,33 +40,27 @@ export default function LandscapePrompt() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center p-6 select-none text-white text-center pointer-events-auto"
+        transition={{ duration: 0.3 }}
+        className="fixed inset-0 z-[99999] bg-black/75 backdrop-blur-lg flex flex-col items-center justify-center p-6 select-none text-white text-center pointer-events-auto"
       >
-        <motion.div
-          initial={{ scale: 0.9, y: 20 }}
-          animate={{ scale: 1, y: 0 }}
-          transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="relative max-w-sm w-full bg-[#1e1e1e]/90 border border-white/15 p-8 rounded-2xl shadow-2xl flex flex-col items-center backdrop-blur-md"
-        >
-          <div className="relative w-24 h-24 mb-6 flex items-center justify-center">
-            <div className="absolute inset-0 bg-blue-500/20 rounded-full animate-ping opacity-25" />
-            <motion.div
-              animate={{ rotate: [0, 90, 90, 0] }}
-              transition={{ repeat: Infinity, duration: 2.8, ease: "easeInOut", times: [0, 0.4, 0.7, 1], repeatDelay: 0.8 }}
-              className="w-16 h-16 rounded-xl border-2 border-blue-400 bg-neutral-900/90 shadow-lg flex items-center justify-center text-blue-400"
-            >
-              <MdScreenRotation size={32} />
-            </motion.div>
-          </div>
+        <div className="relative w-24 h-24 mb-6 flex items-center justify-center">
+          <motion.div
+            animate={{ rotate: [0, 90, 90, 0] }}
+            transition={{ repeat: Infinity, duration: 2.8, ease: "easeInOut", times: [0, 0.4, 0.7, 1], repeatDelay: 0.8 }}
+            className="w-16 h-16 rounded-xl border border-white/30 bg-neutral-900/60 backdrop-blur-sm shadow-xl flex items-center justify-center text-white/90"
+          >
+            <MdScreenRotation size={32} />
+          </motion.div>
+        </div>
 
-          <h2 className="text-2xl font-bold mb-2 tracking-tight text-white">
-            Please Rotate Your Device
-          </h2>
-
-          <p className="text-neutral-300 text-sm leading-relaxed font-light">
-            Please rotate your phone horizontally for the desktop experience.
+        <div className="space-y-2 max-w-xs">
+          <h3 className="text-xl font-semibold text-white tracking-wide">
+            Rotate Your Device
+          </h3>
+          <p className="text-xs text-neutral-300 font-normal leading-relaxed">
+            Please turn your phone to landscape mode for the desktop experience.
           </p>
-        </motion.div>
+        </div>
       </motion.div>
     </AnimatePresence>
   );
