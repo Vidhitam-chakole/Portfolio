@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserProfile } from "../user/UserProfile";
 import { MdWifi, MdAccessibilityNew, MdPowerSettingsNew, MdArrowForward } from "react-icons/md";
+import { requestFullscreen } from "../../utils/fullscreen";
 
 function Login({ toggleLogin }) {
   const [name, setName] = useState("");
@@ -12,6 +13,8 @@ function Login({ toggleLogin }) {
 
   async function login(e) {
     if (e) e.preventDefault();
+    // Trigger mobile fullscreen on login gesture
+    requestFullscreen().catch(() => {});
     try {
       setLoading(true);
       const trimmedName = name.trim() || "User";
@@ -103,7 +106,7 @@ function Login({ toggleLogin }) {
                 <span>Sign in</span>
                 <MdArrowForward className="text-base" />
               </button>
-             
+
               <div
                 className="text-white mt-3 text-sm btn btn-ghost hover:text-black tooltip tooltip-bottom flex w-auto cursor-pointer"
                 onClick={toggleLogin}

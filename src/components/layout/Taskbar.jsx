@@ -1,9 +1,11 @@
-import React, { useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useCurrentTime } from "../../hooks";
 import { formatDate, formatTime } from "../../utils/helpers";
 import { FaWifi, FaVolumeUp, FaBatteryFull, FaBell, FaChevronUp } from "react-icons/fa";
+import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
+import { toggleFullscreen, isFullscreen as checkFullscreen } from "../../utils/fullscreen";
 
 // Taskbar button component
 const TaskbarButton = React.memo(({ onClick, icon, alt, className = "", isActive = false }) => (
@@ -50,6 +52,17 @@ SystemTrayIcon.propTypes = {
 
 const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, toggleWindow, minimizeWindow, minimizedWindows = new Set(), toggleVideo, videoOn = false }) => {
   const currentTime = useCurrentTime();
+  const [isFullscreen, setIsFullscreen] = useState(() => checkFullscreen());
+
+  useEffect(() => {
+    const onFsChange = () => setIsFullscreen(checkFullscreen());
+    document.addEventListener("fullscreenchange", onFsChange);
+    document.addEventListener("webkitfullscreenchange", onFsChange);
+    return () => {
+      document.removeEventListener("fullscreenchange", onFsChange);
+      document.removeEventListener("webkitfullscreenchange", onFsChange);
+    };
+  }, []);
 
   const handleExplorerClick = useCallback(() => {
     if (windows.explorer) {
@@ -162,6 +175,21 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
           aria-label="Show hidden icons"
         >
           <FaChevronUp className="text-xs" />
+        </button>
+
+        {/* Fullscreen toggle button */}
+        <button
+          type="button"
+          onClick={() => toggleFullscreen()}
+          className="flex items-center justify-center h-full px-1 sm:px-1.5 hover:bg-white/10 transition-colors duration-150 rounded-lg cursor-pointer text-white/90 hover:text-white"
+          aria-label={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+          title={isFullscreen ? "Exit Full Screen" : "Enter Full Screen"}
+        >
+          {isFullscreen ? (
+            <MdFullscreenExit className="text-base sm:text-lg" />
+          ) : (
+            <MdFullscreen className="text-base sm:text-lg" />
+          )}
         </button>
 
         {/* Network, volume, battery icons */}

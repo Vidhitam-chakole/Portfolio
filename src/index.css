@@ -20,6 +20,21 @@ img {
   content-visibility: auto;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+  height: 100dvh;
+  min-height: -webkit-fill-available;
+  width: 100%;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 body {
   background-image: url("https://images5.alphacoders.com/115/1159855.jpg");
   background-repeat: no-repeat;
@@ -82,19 +97,8 @@ body {
   transform: translateZ(0);
   backface-visibility: hidden;
 }
-.context-menu {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
 .cursor-custom {
   cursor: url("https://assets.codepen.io/5356857/flashlight.svg"), none;
-}
-#content {
-  height: 100vh;
 }
 
 #w11-start-section {

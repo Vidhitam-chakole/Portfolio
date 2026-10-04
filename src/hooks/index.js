@@ -4,3 +4,4 @@ export { useCurrentTime } from "./useCurrentTime";
 export { useImagePreloader } from "./useImagePreloader";
 export { useDebounce } from "./useDebounce";
 export { useMediaPreloader } from "./useMediaPreloader";
+export { useMobileFullscreen } from "./useMobileFullscreen";

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { MdFullscreen } from "react-icons/md";
+import { requestFullscreen } from "../../utils/fullscreen";
 
 export default function LandscapePrompt() {
   const [isPortraitMobile, setIsPortraitMobile] = useState(false);
@@ -29,6 +31,10 @@ export default function LandscapePrompt() {
     };
   }, []);
 
+  const handleFullscreenTrigger = () => {
+    requestFullscreen();
+  };
+
   if (!isPortraitMobile) {
     return null;
   }
@@ -40,7 +46,9 @@ export default function LandscapePrompt() {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
-        className="fixed inset-0 z-[99999] bg-black/75 backdrop-blur-lg flex flex-col items-center justify-center p-6 select-none text-white text-center pointer-events-auto"
+        onClick={handleFullscreenTrigger}
+        onTouchStart={handleFullscreenTrigger}
+        className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-xl flex flex-col items-center justify-center p-6 select-none text-white text-center cursor-pointer pointer-events-auto"
       >
         {/* Animated Phone to Landscape */}
         <div className="relative w-32 h-32 flex items-center justify-center mb-6">
@@ -83,13 +91,25 @@ export default function LandscapePrompt() {
         </div>
 
         {/* Minimal Text Information */}
-        <div className="space-y-2 max-w-xs">
+        <div className="space-y-3 max-w-xs flex flex-col items-center">
           <h3 className="text-xl font-semibold text-white tracking-wide">
             Rotate Your Device
           </h3>
           <p className="text-xs text-neutral-300 font-normal leading-relaxed">
             Please turn your phone to landscape mode for the desktop experience.
           </p>
+
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleFullscreenTrigger();
+            }}
+            className="mt-2 flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600/90 hover:bg-blue-600 active:scale-95 text-white text-xs font-medium rounded-lg shadow-lg border border-blue-400/30 transition-all cursor-pointer"
+          >
+            <MdFullscreen className="text-lg" />
+            <span>Go Fullscreen</span>
+          </button>
         </div>
       </motion.div>
     </AnimatePresence>

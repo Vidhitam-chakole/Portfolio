@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState, useCallback, useRef, lazy, Suspense } from "react";
 import Taskbar from "../components/layout/Taskbar";
-import RightClick from "../components/utilities/RightClick";
 import StartMenu from "../components/layout/StartMenu";
 import Slider from "../components/utilities/Slider";
 import LoadingSpinner from "../components/shared/LoadingSpinner";
@@ -421,9 +420,6 @@ function Main() {
           />
         )}
         <div className="relative h-full w-full top-0 left-0 z-10 text-white pointer-events-none">
-          <div className="pointer-events-auto">
-            <RightClick option={true} />
-          </div>
           <div className="flex flex-col flex-wrap max-h-[calc(100vh-3.5rem)] content-start gap-1 absolute top-2 left-2 pointer-events-auto">
             {desktopIcons}
           </div>
