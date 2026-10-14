@@ -19,7 +19,10 @@ const TaskbarButton = React.memo(({ onClick, icon, alt, className = "", isActive
       src={icon}
       alt={alt}
       className="w-7 h-7"
+      width="28"
+      height="28"
       loading="eager"
+      decoding="async"
       draggable="false"
     />
     {isActive && (
@@ -50,8 +53,26 @@ SystemTrayIcon.propTypes = {
   className: PropTypes.string,
 };
 
-const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, toggleWindow, minimizeWindow, minimizedWindows = new Set(), toggleVideo, videoOn = false }) => {
+// Isolated Clock component to prevent Taskbar re-rendering every 1000ms
+const Clock = React.memo(() => {
   const currentTime = useCurrentTime();
+  return (
+    <button
+      type="button"
+      className="flex items-center h-full px-1.5 sm:px-2.5 hover:bg-white/10 transition-colors duration-150 rounded-lg cursor-pointer"
+      aria-label="Notifications and calendar"
+    >
+      <time className="flex flex-col items-end text-[10px] sm:text-[11px] leading-tight mr-1 sm:mr-2">
+        <span>{formatTime(currentTime)}</span>
+        <span className="hidden xs:inline">{formatDate(currentTime)}</span>
+      </time>
+      <FaBell className="text-xs sm:text-sm" aria-hidden="true" />
+    </button>
+  );
+});
+Clock.displayName = "Clock";
+
+const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, toggleWindow, minimizeWindow, minimizedWindows = new Set(), toggleVideo, videoOn = false }) => {
   const [isFullscreen, setIsFullscreen] = useState(() => checkFullscreen());
 
   useEffect(() => {
@@ -200,17 +221,7 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
         </div>
 
         {/* Clock and notifications */}
-        <button
-          type="button"
-          className="flex items-center h-full px-1.5 sm:px-2.5 hover:bg-white/10 transition-colors duration-150 rounded-lg cursor-pointer"
-          aria-label="Notifications and calendar"
-        >
-          <time className="flex flex-col items-end text-[10px] sm:text-[11px] leading-tight mr-1 sm:mr-2">
-            <span>{formatTime(currentTime)}</span>
-            <span className="hidden xs:inline">{formatDate(currentTime)}</span>
-          </time>
-          <FaBell className="text-xs sm:text-sm" aria-hidden="true" />
-        </button>
+        <Clock />
 
         {/* Show desktop button */}
         <button
@@ -234,6 +245,10 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
           <img
             src="/images/apps/messi.png"
             alt="Messi wallpaper toggle"
+            width="48"
+            height="48"
+            loading="lazy"
+            decoding="async"
             draggable="false"
             role="button"
             tabIndex={0}

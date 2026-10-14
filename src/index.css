@@ -36,11 +36,8 @@ body,
 }
 
 body {
-  background-image: url("https://images5.alphacoders.com/115/1159855.jpg");
-  background-repeat: no-repeat;
+  background-color: #000;
   overflow: hidden;
-  background-size: cover;
-  background-position: center;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -54,37 +51,59 @@ body {
 
 /* Messi toggle image styles */
 .messi-toggle {
-  transition: transform 220ms cubic-bezier(.2,.9,.2,1), opacity 180ms ease-in-out;
+  transition: transform 220ms cubic-bezier(.2, .9, .2, 1), opacity 180ms ease-in-out;
   transform-origin: center;
   will-change: transform, opacity;
 }
+
 .messi-toggle:hover {
   transform: scale(1.06) rotate(-6deg);
 }
+
 .messi-active {
   animation: messi-pulse 1.6s ease-in-out infinite;
 }
+
 @keyframes messi-pulse {
-  0% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.08) rotate(-4deg); }
-  100% { transform: scale(1) rotate(0deg); }
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.08) rotate(-4deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
 }
 
 /* Responsive adjustments for small screens */
 @media (max-width: 640px) {
   .messi-toggle {
-    transition: transform 180ms cubic-bezier(.2,.9,.2,1), opacity 150ms ease-in-out;
+    transition: transform 180ms cubic-bezier(.2, .9, .2, 1), opacity 150ms ease-in-out;
   }
+
   .messi-toggle:hover {
     transform: scale(1.03) rotate(-4deg);
   }
+
   .messi-active {
     animation: messi-pulse-mobile 1.2s ease-in-out infinite;
   }
+
   @keyframes messi-pulse-mobile {
-    0% { transform: scale(1) rotate(0deg); }
-    50% { transform: scale(1.04) rotate(-3deg); }
-    100% { transform: scale(1) rotate(0deg); }
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+      transform: scale(1.04) rotate(-3deg);
+    }
+
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
   }
 }
 
@@ -97,6 +116,7 @@ body {
   transform: translateZ(0);
   backface-visibility: hidden;
 }
+
 .cursor-custom {
   cursor: url("https://assets.codepen.io/5356857/flashlight.svg"), none;
 }
@@ -121,9 +141,11 @@ body {
 .app-icon:hover {
   background-color: rgb(55, 55, 55) !important;
 }
+
 #cerca-input-start:focus {
   outline: none;
 }
+
 #cerca-input-start {
   background-color: var(--bg-color-search);
   padding: 0 1em;
@@ -211,12 +233,12 @@ body {
   text-transform: capitalize;
 }
 
-#second-app-container > div:active img {
+#second-app-container>div:active img {
   transform: scale(0.8);
   transition-duration: 0.3s;
 }
 
-#second-app-container > div img {
+#second-app-container>div img {
   transition-duration: 0.3s;
 }
 
@@ -265,7 +287,7 @@ label input {
   padding: 0.3em 0 0 1em;
 }
 
-#article-container > div {
+#article-container>div {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 1em;
@@ -276,16 +298,16 @@ label input {
   cursor: pointer;
 }
 
-#article-container > div:hover {
+#article-container>div:hover {
   background-color: var(--glass-white-color);
   transition-duration: 0.5s;
 }
 
-#article-container > div > div:nth-child(2) > div:nth-child(1) {
+#article-container>div>div:nth-child(2)>div:nth-child(1) {
   font-size: 0.9em;
 }
 
-#article-container > div > div:nth-child(2) > div:nth-child(2) {
+#article-container>div>div:nth-child(2)>div:nth-child(2) {
   font-size: 0.8em;
   margin-top: 0.2em;
   opacity: 0.7;
@@ -334,8 +356,8 @@ label input {
   fill: white !important;
 }
 
-#first-container div:active > img,
-#first-container div:active > svg {
+#first-container div:active>img,
+#first-container div:active>svg {
   transform: scale(0.5);
   transition-duration: 0.5s;
 }
@@ -345,8 +367,8 @@ label input {
   transition-duration: 0.5s;
 }
 
-#first-container > div[title]:hover::after,
-#sistema-info > div[title]:hover::after,
+#first-container>div[title]:hover::after,
+#sistema-info>div[title]:hover::after,
 #sistema-data[title]:hover::after {
   content: attr(title);
   color: white;
@@ -366,12 +388,13 @@ label input {
     opacity: 0;
     transform: translateY(calc(-100% - 3em));
   }
+
   to {
     opacity: 1;
   }
 }
 
-#sistema-info > div[title]:hover::after {
+#sistema-info>div[title]:hover::after {
   transform: translateY(calc(-100% - 2em));
   font-size: 0.6em;
 }
@@ -385,16 +408,47 @@ label input {
 
 /* Chainsaw shake animation */
 @keyframes chainsaw-shake {
-  0%, 100% { transform: translate(-10%, -20%) rotate(0deg); }
-  10% { transform: translate(-9%, -21%) rotate(-1deg); }
-  20% { transform: translate(-11%, -19%) rotate(1deg); }
-  30% { transform: translate(-9%, -21%) rotate(-1deg); }
-  40% { transform: translate(-11%, -19%) rotate(1deg); }
-  50% { transform: translate(-10%, -20%) rotate(0deg); }
-  60% { transform: translate(-11%, -21%) rotate(1deg); }
-  70% { transform: translate(-9%, -19%) rotate(-1deg); }
-  80% { transform: translate(-11%, -21%) rotate(1deg); }
-  90% { transform: translate(-9%, -19%) rotate(-1deg); }
+
+  0%,
+  100% {
+    transform: translate(-10%, -20%) rotate(0deg);
+  }
+
+  10% {
+    transform: translate(-9%, -21%) rotate(-1deg);
+  }
+
+  20% {
+    transform: translate(-11%, -19%) rotate(1deg);
+  }
+
+  30% {
+    transform: translate(-9%, -21%) rotate(-1deg);
+  }
+
+  40% {
+    transform: translate(-11%, -19%) rotate(1deg);
+  }
+
+  50% {
+    transform: translate(-10%, -20%) rotate(0deg);
+  }
+
+  60% {
+    transform: translate(-11%, -21%) rotate(1deg);
+  }
+
+  70% {
+    transform: translate(-9%, -19%) rotate(-1deg);
+  }
+
+  80% {
+    transform: translate(-11%, -21%) rotate(1deg);
+  }
+
+  90% {
+    transform: translate(-9%, -19%) rotate(-1deg);
+  }
 }
 
 .chainsaw-shake {

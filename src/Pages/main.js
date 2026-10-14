@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useState, useCallback, useRef, lazy, Suspense } from "react";
 import Taskbar from "../components/layout/Taskbar";
 import StartMenu from "../components/layout/StartMenu";
-import Slider from "../components/utilities/Slider";
-import LoadingSpinner from "../components/shared/LoadingSpinner";
 import { motion } from "framer-motion";
 import appsData from "../data/data";
 // bounds are computed locally using viewport dims; no helper import needed
 import { WINDOW_SIZES } from "../utils/constants";
-import { useImagePreloader, useMediaPreloader, useWindowSize } from "../hooks";
+import { useWindowSize } from "../hooks";
+
+// Lazy load Slider and heavy components
+const Slider = lazy(() => import("../components/utilities/Slider"));
 
 // Lazy load heavy components
 const Explorer = lazy(() => import("../components/apps/Explorer"));
@@ -49,22 +50,6 @@ function Main() {
   const [videoWallpaper, setVideoWallpaper] = useState(false);
   // Stable toggle callback to avoid unnecessary re-renders when passed to children
   const toggleVideo = useCallback(() => setVideoWallpaper((v) => !v), []);
-
-  // Preload critical app icons - only local ones
-  const iconUrls = useMemo(
-    () => appsData.map((app) => app.icon).filter((icon) => icon.startsWith("/images/")),
-    []
-  );
-  
-  const iconsLoaded = useImagePreloader(iconUrls);
-
-  // Preload audio files used on this page (best-effort — browsers may limit)
-  const audioUrls = useMemo(
-    () => ["/audio/sleep.mp3", "/audio/lullaby.mp3", "/audio/shutdown.mp3"],
-    []
-  );
-  // Preload audio files in background for sleep/shutdown sounds
-  useMediaPreloader(audioUrls);
 
   // Memoized toggle function with useCallback for better performance
   const toggleWindow = useCallback((window, input = null) => {
@@ -206,6 +191,10 @@ function Main() {
             src={app.icon}
             alt={app.name}
             className={app.size || "w-10 h-10"}
+            width="40"
+            height="40"
+            loading="lazy"
+            decoding="async"
             onDragStart={(e) => e.preventDefault()}
             style={{ imageRendering: "crisp-edges" }}
           />
@@ -336,12 +325,13 @@ function Main() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
+    if (!isSleeping || actionType !== "sleep") return;
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [isSleeping, actionType, images.length]);
 
   // When video wallpaper is enabled, add a body class to hide the background image
   useEffect(() => {
@@ -354,15 +344,6 @@ function Main() {
       document.body.classList.remove("video-wallpaper-active");
     };
   }, [videoWallpaper]);
-
-  // Render desktop immediately once critical icons are ready (audio preloads in background)
-  if (!iconsLoaded) {
-    return (
-      <div className="relative h-screen w-full bg-black flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    );
-  }
 
   return (
     <>
@@ -402,7 +383,10 @@ function Main() {
         <Torch input={input} setInput={setInput} />
       </Suspense>
       <div 
-        className="relative h-screen desktop-background" 
+        className="relative h-screen desktop-background bg-cover bg-center bg-no-repeat" 
+        style={{
+          backgroundImage: videoWallpaper ? "none" : "url('/images/wallpapers/windows11.webp')",
+        }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -559,11 +543,13 @@ function Main() {
         />
       </div>
       {!windows.destroyer && (
-        <Slider
-          isMenuOpen={windows.menu}
-          setIsMenuOpen={() => toggleWindow("menu")}
-          toggleMenu={() => toggleWindow("menu")}
-        />
+        <Suspense fallback={null}>
+          <Slider
+            isMenuOpen={windows.menu}
+            setIsMenuOpen={() => toggleWindow("menu")}
+            toggleMenu={() => toggleWindow("menu")}
+          />
+        </Suspense>
       )}
     </>
   );

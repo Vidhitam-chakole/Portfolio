@@ -14,7 +14,7 @@ function Login({ toggleLogin }) {
   async function login(e) {
     if (e) e.preventDefault();
     // Trigger mobile fullscreen on login gesture
-    requestFullscreen().catch(() => {});
+    requestFullscreen().catch(() => { });
     try {
       setLoading(true);
       const trimmedName = name.trim() || "User";
@@ -67,7 +67,7 @@ function Login({ toggleLogin }) {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Enter username here"
+            placeholder="Enter yourname here"
           />
 
           {loading ? (

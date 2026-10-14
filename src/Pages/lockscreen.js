@@ -6,7 +6,7 @@ function Lockscreen() {
     <div
       className="relative h-screen w-full overflow-hidden bg-cover bg-center bg-no-repeat select-none"
       style={{
-        backgroundImage: `url('/images/wallpapers/windows11.jpg')`,
+        backgroundImage: `url('/images/wallpapers/windows11.webp')`,
       }}
     >
       {/* Windows 11 Acrylic / Vignette Overlay */}

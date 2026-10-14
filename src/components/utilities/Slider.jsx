@@ -5,43 +5,56 @@ import { MdSearch, MdPhotoCamera } from "react-icons/md";
 export default function Slider({ isMenuOpen, toggleMenu }) {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [funFact, setFunFact] = useState("");
-  const [hasFetchedInitial, setHasFetchedInitial] = useState(false);
 
-  // Fetch fun fact only once on mount and when slider is opened
+  // Fetch fun fact with cache and timeout only when slider is opened
   useEffect(() => {
+    if (!isMenuOpen) return;
+    let isCancelled = false;
+
     const fetchFunFact = async () => {
       try {
+        const cached = sessionStorage.getItem("cached_fun_fact");
+        if (cached && !funFact) {
+          setFunFact(cached);
+        }
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 4000);
         const response = await fetch(
-          "https://uselessfacts.jsph.pl/random.json?language=en"
+          "https://uselessfacts.jsph.pl/random.json?language=en",
+          { signal: controller.signal }
         );
-        const data = await response.json();
-        setFunFact(data.text);
+        clearTimeout(timeoutId);
+        if (response.ok) {
+          const data = await response.json();
+          if (!isCancelled && data.text) {
+            setFunFact(data.text);
+            sessionStorage.setItem("cached_fun_fact", data.text);
+          }
+        }
       } catch (error) {
-        console.error("Error fetching fun fact:", error);
+        if (!funFact) {
+          setFunFact("Honey never spoils. Archeologists have found 3,000-year-old honey still perfectly edible.");
+        }
       }
     };
 
-    // Fetch initial fact once
-    if (!hasFetchedInitial) {
-      fetchFunFact();
-      setHasFetchedInitial(true);
-      return;
-    }
+    fetchFunFact();
+    const intervalID = setInterval(fetchFunFact, 30000);
 
-    // Only fetch new facts when slider is open
-    if (!isMenuOpen) return;
+    return () => {
+      isCancelled = true;
+      clearInterval(intervalID);
+    };
+  }, [isMenuOpen, funFact]);
 
-    const intervalID = setInterval(fetchFunFact, 10000);
-
-    return () => clearInterval(intervalID);
-  }, [isMenuOpen, hasFetchedInitial]);
-
+  // Only run clock interval when slider is active
   useEffect(() => {
-    const updateTime = () => setCurrentTime(new Date());
-    const intervalID = setInterval(updateTime, 1000);
+    if (!isMenuOpen) return;
+    setCurrentTime(new Date());
+    const intervalID = setInterval(() => setCurrentTime(new Date()), 1000);
 
     return () => clearInterval(intervalID);
-  }, []);
+  }, [isMenuOpen]);
 
   useEffect(() => {
     const handleVisibilityChange = () => {
@@ -77,10 +90,10 @@ export default function Slider({ isMenuOpen, toggleMenu }) {
         e.stopPropagation();
         toggleMenu();
       }}
-      style={{
-        background: "url(https://images8.alphacoders.com/134/1346089.png)",
+      style={isMenuOpen ? {
+        backgroundImage: "url(/images/wallpapers/slider.webp)",
         backgroundSize: "cover",
-      }}
+      } : undefined}
     >
       <div className="relative flex flex-col justify-center h-full text-primary">
         <div className="absolute flex flex-col items-center w-full top-16 sm:top-24 md:top-32 text-white px-4">
