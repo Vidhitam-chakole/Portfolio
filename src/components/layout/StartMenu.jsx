@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 
 const PINNED_APPS = [
   { name: "Chrome", icon: "/images/apps/chrome.png", alt: "Google Chrome" },
+  { name: "WhatsApp", icon: "/images/apps/whatsapp.svg", alt: "WhatsApp", url: "https://wa.me/917720803992" },
   { name: "Word", icon: "https://laaouatni.github.io/w11CSS/images/word-icon.png", alt: "Word" },
   { name: "Excel", icon: "https://laaouatni.github.io/w11CSS/images/excel-icon.png", alt: "Excel" },
   { name: "Powerpoint", icon: "https://laaouatni.github.io/w11CSS/images/powerpoint-icon.png", alt: "Powerpoint" },
@@ -76,7 +77,16 @@ function StartMenu({
             <div id="second-app-container">
               {(hasBeenOpened || isStartOpen) &&
                 PINNED_APPS.map((app) => (
-                  <div key={app.name} className="app-icon">
+                  <div
+                    key={app.name}
+                    className="app-icon cursor-pointer hover:bg-white/10 rounded-lg p-1 transition-colors"
+                    onClick={() => {
+                      if (app.url) {
+                        window.open(app.url, "_blank", "noopener,noreferrer");
+                        if (toggleStart) toggleStart();
+                      }
+                    }}
+                  >
                     <img
                       src={app.icon}
                       alt={app.alt}

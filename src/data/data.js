@@ -18,6 +18,7 @@ export const socialMediaLinks = {
   linkedin: "https://www.linkedin.com/in/vidhitam-chakole-855172380",
   github: "https://github.com/Vidhitam-chakole",
   instagram: "https://www.instagram.com/vidhitam_chakole",
+  whatsapp: "https://wa.me/917720803992",
   email: "mailto:chakolevidhitam@gmail.com",
   phone: "tel:7720803992",
 };
@@ -329,6 +330,13 @@ const appsData = [
     name: "Instagram",
     icon: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png",
     url: "https://www.instagram.com/vidhitam_chakole",
+    size: "w-10 h-10",
+  },
+  {
+    id: 13,
+    name: "WhatsApp",
+    icon: "/images/apps/whatsapp.svg",
+    url: "https://wa.me/917720803992",
     size: "w-10 h-10",
   },
   {

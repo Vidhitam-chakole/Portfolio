@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Draggable from "react-draggable";
-import { MdMinimize, MdCheckBoxOutlineBlank, MdClose, MdAdd } from "react-icons/md";
+import { MdMinimize, MdCheckBoxOutlineBlank, MdFilterNone, MdClose, MdAdd } from "react-icons/md";
 
 function Apps({ isAppOpen, toggleApp, bounds, input, isActive = false, bringToFront, isMinimized = false, minimizeWindow }) {
   const [contentLoaded, setContentLoaded] = useState(false);
@@ -25,6 +25,9 @@ function Apps({ isAppOpen, toggleApp, bounds, input, isActive = false, bringToFr
     }
   }, [isAppOpen, contentLoaded]);
 
+  const [isMaximized, setIsMaximized] = useState(false);
+  const toggleMaximize = () => setIsMaximized((prev) => !prev);
+
   return (
     <>
       <div
@@ -32,29 +35,45 @@ function Apps({ isAppOpen, toggleApp, bounds, input, isActive = false, bringToFr
           isAppOpen && !isMinimized ? "" : "hidden"
         } ${isActive ? 'z-40' : 'z-30'} w-full h-screen pointer-events-none absolute transition-none`}
       >
-        <Draggable handle=".title-bar" nodeRef={windowRef} bounds={bounds}>
+        <Draggable
+          handle=".title-bar"
+          nodeRef={windowRef}
+          bounds={bounds}
+          disabled={isMaximized}
+          position={isMaximized ? { x: 0, y: 0 } : undefined}
+        >
           {input === "spotify" ? (
             <div
               ref={windowRef}
-              className="window bg-black h-[82vh] max-h-[45rem] w-[95vw] max-w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] font-semibold pointer-events-auto flex flex-col"
+              className={`window bg-black overflow-hidden border-neutral-700 font-semibold pointer-events-auto flex flex-col shadow-2xl transition-all duration-150 ${
+                isMaximized
+                  ? "!fixed !top-0 !left-0 !w-screen !h-[calc(100vh-3rem)] !max-h-none !max-w-none !rounded-none !border-0"
+                  : "h-[82vh] max-h-[45rem] w-[95vw] max-w-[70.5rem] rounded-xl border-[1.5px]"
+              }`}
               onMouseDown={bringToFront}
             >
-              <div className="title-bar shrink-0">
+              <div className="title-bar shrink-0 cursor-move" onDoubleClick={toggleMaximize}>
                 <div className="text-white h-9 flex justify-between select-none">
                   <div className="m-1 ml-4 font-normal">Spotify</div>
                   <div className="flex">
                     <div
                       className="hover:bg-neutral-800 mb-2 w-11 flex justify-center items-center text-xl cursor-pointer"
                       onClick={() => minimizeWindow && minimizeWindow(input)}
+                      title="Minimize"
                     >
                       <MdMinimize />
                     </div>
-                    <div className="hover:bg-neutral-800 mb-2 w-11 flex justify-center items-center text-sm cursor-pointer">
-                      <MdCheckBoxOutlineBlank />
+                    <div
+                      className="hover:bg-neutral-800 mb-2 w-11 flex justify-center items-center text-xs cursor-pointer"
+                      onClick={toggleMaximize}
+                      title={isMaximized ? "Restore Down" : "Maximize"}
+                    >
+                      {isMaximized ? <MdFilterNone className="text-xs" /> : <MdCheckBoxOutlineBlank />}
                     </div>
                     <div
                       className="hover:bg-red-700 mb-2 w-12 flex justify-center items-center text-xl cursor-pointer"
                       onClick={() => toggleApp(input)}
+                      title="Close"
                     >
                       <MdClose />
                     </div>

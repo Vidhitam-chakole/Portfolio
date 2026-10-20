@@ -34,7 +34,11 @@ export const requestFullscreen = async (targetElement) => {
 
   try {
     if (element.requestFullscreen) {
-      await element.requestFullscreen({ navigationUI: "hide" });
+      try {
+        await element.requestFullscreen({ navigationUI: "hide" });
+      } catch (e) {
+        await element.requestFullscreen();
+      }
     } else if (element.webkitRequestFullscreen) {
       await element.webkitRequestFullscreen();
     } else if (element.mozRequestFullScreen) {
@@ -43,8 +47,13 @@ export const requestFullscreen = async (targetElement) => {
       await element.msRequestFullscreen();
     }
   } catch (err) {
-    // Browsers may block if called without user gesture
-    return false;
+    try {
+      if (document.documentElement && document.documentElement.requestFullscreen) {
+        await document.documentElement.requestFullscreen();
+      }
+    } catch (e) {
+      return false;
+    }
   }
 
   // Attempt to lock orientation to landscape on devices that support Screen Orientation API

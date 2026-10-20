@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Draggable from "react-draggable";
-import { MdMinimize, MdCheckBoxOutlineBlank, MdClose } from "react-icons/md";
+import { MdMinimize, MdCheckBoxOutlineBlank, MdFilterNone, MdClose } from "react-icons/md";
 import {
   VscFiles,
   VscSearch,
@@ -79,20 +79,37 @@ function VsCode({
     }
   };
 
+  const [isMaximized, setIsMaximized] = useState(false);
+  const toggleMaximize = () => setIsMaximized((prev) => !prev);
+
   return (
     <div
       className={`${
         isAppOpen && !isMinimized ? "" : "hidden"
       } ${isActive ? "z-40" : "z-30"} w-full h-screen pointer-events-none absolute transition-none`}
     >
-      <Draggable handle=".title-bar" nodeRef={windowRef} bounds={bounds}>
+      <Draggable
+        handle=".title-bar"
+        nodeRef={windowRef}
+        bounds={bounds}
+        disabled={isMaximized}
+        position={isMaximized ? { x: 0, y: 0 } : undefined}
+      >
         <div
           ref={windowRef}
-          className="window bg-[#1e1e1e] h-[calc(100vh-3rem)] w-screen sm:h-[84vh] sm:max-h-[48rem] sm:w-[96vw] sm:max-w-[72rem] sm:rounded-xl rounded-none overflow-hidden border-neutral-700 sm:border-[1.5px] border-0 font-sans pointer-events-auto flex flex-col shadow-2xl"
+          className={`window bg-[#1e1e1e] overflow-hidden border-neutral-700 font-sans pointer-events-auto flex flex-col shadow-2xl transition-all duration-150 ${
+            isMaximized
+              ? "!fixed !top-0 !left-0 !w-screen !h-[calc(100vh-3rem)] !max-h-none !max-w-none !rounded-none !border-0"
+              : "h-[calc(100vh-3rem)] w-screen sm:h-[84vh] sm:max-h-[48rem] sm:w-[96vw] sm:max-w-[72rem] sm:rounded-xl rounded-none sm:border-[1.5px] border-0"
+          }`}
           onMouseDown={bringToFront}
         >
           {/* Top Title Bar */}
-          <div className="title-bar flex justify-between items-center bg-[#2d2d2d] text-neutral-300 h-9 select-none px-2 text-xs border-b border-[#3c3c3c]">
+          <div
+            className="title-bar flex justify-between items-center bg-[#2d2d2d] text-neutral-300 h-9 select-none px-2 text-xs border-b border-[#3c3c3c] cursor-move"
+            onMouseDown={bringToFront}
+            onDoubleClick={toggleMaximize}
+          >
             <div className="flex items-center gap-2">
               <img
                 src="https://laaouatni.github.io/w11CSS/images/vs-code.ico"
@@ -119,22 +136,26 @@ function VsCode({
 
             <div className="flex items-center -mr-2">
               <button
-                className="hover:bg-[#3e3e3e] w-11 h-9 flex justify-center items-center text-neutral-300 hover:text-white text-base"
+                className="hover:bg-[#3e3e3e] w-11 h-9 flex justify-center items-center text-neutral-300 hover:text-white text-base cursor-pointer"
                 onClick={minimizeWindow}
                 aria-label="Minimize"
+                title="Minimize"
               >
                 <MdMinimize />
               </button>
               <button
-                className="hover:bg-[#3e3e3e] w-11 h-9 flex justify-center items-center text-neutral-300 hover:text-white text-xs"
-                aria-label="Maximize"
+                className="hover:bg-[#3e3e3e] w-11 h-9 flex justify-center items-center text-neutral-300 hover:text-white text-xs cursor-pointer"
+                onClick={toggleMaximize}
+                aria-label={isMaximized ? "Restore Down" : "Maximize"}
+                title={isMaximized ? "Restore Down" : "Maximize"}
               >
-                <MdCheckBoxOutlineBlank />
+                {isMaximized ? <MdFilterNone className="text-xs" /> : <MdCheckBoxOutlineBlank />}
               </button>
               <button
-                className="hover:bg-[#e81123] w-12 h-9 flex justify-center items-center text-neutral-300 hover:text-white text-lg"
+                className="hover:bg-[#e81123] w-12 h-9 flex justify-center items-center text-neutral-300 hover:text-white text-lg cursor-pointer"
                 onClick={toggleVsCode}
                 aria-label="Close"
+                title="Close"
               >
                 <MdClose />
               </button>

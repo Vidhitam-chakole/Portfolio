@@ -122,12 +122,12 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
   }, [minimizeWindow]);
 
   return (
-    <div className="fixed bottom-0 flex justify-between items-center w-full h-11 sm:h-12 bg-[#202020]/95 backdrop-blur-md border-t border-neutral-700/80 select-none pointer-events-auto text-white z-40 py-0.5 px-1 sm:px-3">
-      {/* Left spacer for centering (responsive) */}
-      <div className="hidden sm:block sm:w-12 md:w-[10%]" aria-hidden="true" />
+    <div className="fixed bottom-0 flex justify-between items-center w-full h-11 sm:h-12 bg-[#202020]/95 backdrop-blur-md border-t border-neutral-700/80 select-none pointer-events-auto text-white z-50 py-0.5 px-1 sm:px-3">
+      {/* Left section / widget spacer */}
+      <div className="w-10 sm:w-20 shrink-0" aria-hidden="true" />
 
-      {/* Center - App icons */}
-      <nav className="flex justify-center items-center gap-1 sm:gap-2 overflow-x-auto max-w-full" role="navigation" aria-label="Taskbar applications">
+      {/* Center - App icons (mathematically centered) */}
+      <nav className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1 sm:gap-2 h-full max-w-[75vw] overflow-x-auto scrollbar-none" role="navigation" aria-label="Taskbar applications">
         <TaskbarButton
           onClick={toggleStart}
           icon="/images/apps/windows.png"
@@ -144,6 +144,11 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
           icon="/images/apps/chrome.png"
           alt="Google Chrome"
           isActive={windows.chrome}
+        />
+        <TaskbarButton
+          onClick={() => window.open("https://wa.me/917720803992", "_blank", "noopener,noreferrer")}
+          icon="/images/apps/whatsapp.svg"
+          alt="WhatsApp"
         />
         {windows.calculator && (
           <TaskbarButton
@@ -201,15 +206,20 @@ const Taskbar = ({ toggleStart, toggleExplorer, toggleBrowser, windows = {}, tog
         {/* Fullscreen toggle button */}
         <button
           type="button"
-          onClick={() => toggleFullscreen()}
-          className="flex items-center justify-center h-full px-1 sm:px-1.5 hover:bg-white/10 transition-colors duration-150 rounded-lg cursor-pointer text-white/90 hover:text-white"
+          onClick={async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            await toggleFullscreen();
+            setIsFullscreen(checkFullscreen());
+          }}
+          className="flex items-center justify-center h-full px-1.5 sm:px-2 hover:bg-white/10 active:bg-white/20 transition-colors duration-150 rounded-lg cursor-pointer text-white/90 hover:text-white"
           aria-label={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
           title={isFullscreen ? "Exit Full Screen" : "Enter Full Screen"}
         >
           {isFullscreen ? (
-            <MdFullscreenExit className="text-base sm:text-lg" />
+            <MdFullscreenExit className="text-lg sm:text-xl" />
           ) : (
-            <MdFullscreen className="text-base sm:text-lg" />
+            <MdFullscreen className="text-lg sm:text-xl" />
           )}
         </button>
 

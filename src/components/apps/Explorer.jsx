@@ -4,6 +4,7 @@ import AboutMe from "../apps/AboutMe";
 import {
   MdMinimize,
   MdCheckBoxOutlineBlank,
+  MdFilterNone,
   MdClose,
   MdAdd,
   MdArrowBack,
@@ -154,36 +155,60 @@ const Explorer = ({ isExplorerOpen, toggleExplorer, aboutMe, bounds, isActive = 
     setIcon(iconMap[page] || "me");
   }, [page, aboutMe]);
 
+  const [isMaximized, setIsMaximized] = useState(false);
+  const toggleMaximize = () => setIsMaximized((prev) => !prev);
+
   if (!isExplorerOpen || isMinimized) return null;
 
   return (
     <div
       className={`${isActive ? 'z-40' : 'z-30'} w-full h-screen pointer-events-none absolute transition-none`}
     >
-      <Draggable handle=".title-bar" nodeRef={explorerRef} bounds={bounds}>
+      <Draggable
+        handle=".title-bar"
+        nodeRef={explorerRef}
+        bounds={bounds}
+        disabled={isMaximized}
+        position={isMaximized ? { x: 0, y: 0 } : undefined}
+      >
         <div
           ref={explorerRef}
-          className="window bg-black h-[calc(100vh-3rem)] w-screen sm:h-[82vh] sm:max-h-[39rem] sm:w-[95vw] sm:max-w-[70.5rem] sm:rounded-xl rounded-none overflow-hidden border-neutral-700 sm:border-[1.5px] border-0 pointer-events-auto flex flex-col"
+          className={`window bg-black overflow-hidden border-neutral-700 pointer-events-auto flex flex-col transition-all duration-150 ${
+            isMaximized
+              ? "!fixed !top-0 !left-0 !w-screen !h-[calc(100vh-3rem)] !max-h-none !max-w-none !rounded-none !border-0"
+              : "h-[calc(100vh-3rem)] w-screen sm:h-[82vh] sm:max-h-[39rem] sm:w-[95vw] sm:max-w-[70.5rem] sm:rounded-xl rounded-none sm:border-[1.5px] border-0"
+          }`}
           onMouseDown={bringToFront}
         >
-          <div className="title-bar bg-neutral-900 text-white h-8 w-full flex justify-end items-center select-none shrink-0" onMouseDown={bringToFront}>
+          <div
+            className="title-bar bg-neutral-900 text-white h-8 w-full flex justify-end items-center select-none shrink-0 cursor-move"
+            onMouseDown={bringToFront}
+            onDoubleClick={toggleMaximize}
+          >
             <button
               type="button"
-              className="hover:bg-neutral-800 transition-colors duration-150 w-10 h-8 flex justify-center items-center text-base"
+              className="hover:bg-neutral-800 transition-colors duration-150 w-10 h-8 flex justify-center items-center text-base cursor-pointer"
               onClick={minimizeWindow}
+              title="Minimize"
+              aria-label="Minimize"
             >
               <MdMinimize />
             </button>
             <button
               type="button"
-              className="hover:bg-neutral-800 transition-colors duration-150 w-10 h-8 flex justify-center items-center text-xs"
+              className="hover:bg-neutral-800 transition-colors duration-150 w-10 h-8 flex justify-center items-center text-xs cursor-pointer"
+              onClick={toggleMaximize}
+              title={isMaximized ? "Restore Down" : "Maximize"}
+              aria-label={isMaximized ? "Restore Down" : "Maximize"}
             >
-              <MdCheckBoxOutlineBlank />
+              {isMaximized ? <MdFilterNone className="text-xs" /> : <MdCheckBoxOutlineBlank />}
             </button>
             <button
               type="button"
-              className="hover:bg-red-700 transition-colors duration-150 w-10 h-8 flex justify-center items-center text-base"
+              className="hover:bg-red-700 transition-colors duration-150 w-10 h-8 flex justify-center items-center text-base cursor-pointer"
               onClick={toggleExplorer}
+              title="Close"
+              aria-label="Close"
             >
               <MdClose />
             </button>

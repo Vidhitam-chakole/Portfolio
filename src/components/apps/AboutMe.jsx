@@ -9,6 +9,7 @@ import {
   FaGraduationCap,
   FaCertificate,
   FaPhoneAlt,
+  FaWhatsapp,
 } from "react-icons/fa";
 import {
   profileDescription,
@@ -108,6 +109,20 @@ const AboutMe = ({ page, handleDivClick, expandedDiv }) => {
                     >
                       <FaEnvelope size={14} />
                       <span>Email</span>
+                    </a>
+                  )}
+
+                  {/* WhatsApp */}
+                  {socialMediaLinks.whatsapp && (
+                    <a
+                      href={socialMediaLinks.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-[#25D366]/15 hover:bg-[#25D366] text-[#25D366] hover:text-white border border-[#25D366]/40 rounded-lg text-xs font-semibold transition-all duration-150"
+                      title="WhatsApp Chat"
+                    >
+                      <FaWhatsapp size={15} />
+                      <span>WhatsApp</span>
                     </a>
                   )}
 

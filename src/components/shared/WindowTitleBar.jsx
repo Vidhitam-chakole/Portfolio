@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { VscChromeMinimize, VscChromeMaximize, VscClose } from "react-icons/vsc";
+import { VscChromeMinimize, VscChromeMaximize, VscChromeRestore, VscClose } from "react-icons/vsc";
 
 /**
  * Reusable window title bar component
  */
-const WindowTitleBar = ({ title, onMinimize, onMaximize, onClose, showMaximize = true, bringToFront }) => {
+const WindowTitleBar = ({ title, onMinimize, onMaximize, onClose, showMaximize = true, bringToFront, isMaximized = false }) => {
   return (
-    <div className="title-bar" onMouseDown={bringToFront}>
+    <div className="title-bar cursor-move" onMouseDown={bringToFront} onDoubleClick={onMaximize}>
       <div className="text-white h-9 flex justify-between select-none">
         <div className="m-1 ml-4 font-normal">{title}</div>
         <div className="flex">
@@ -16,6 +16,7 @@ const WindowTitleBar = ({ title, onMinimize, onMaximize, onClose, showMaximize =
               className="hover:bg-neutral-800 w-11 h-9 flex justify-center items-center cursor-pointer"
               onClick={onMinimize}
               aria-label="Minimize"
+              title="Minimize"
               type="button"
             >
               <VscChromeMinimize />
@@ -25,10 +26,11 @@ const WindowTitleBar = ({ title, onMinimize, onMaximize, onClose, showMaximize =
             <button
               className="hover:bg-neutral-800 w-11 h-9 flex justify-center items-center cursor-pointer"
               onClick={onMaximize}
-              aria-label="Maximize"
+              aria-label={isMaximized ? "Restore Down" : "Maximize"}
+              title={isMaximized ? "Restore Down" : "Maximize"}
               type="button"
             >
-              <VscChromeMaximize />
+              {isMaximized ? <VscChromeRestore /> : <VscChromeMaximize />}
             </button>
           )}
           {onClose && (

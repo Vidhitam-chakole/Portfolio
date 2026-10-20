@@ -3,6 +3,7 @@ import Taskbar from "../components/layout/Taskbar";
 import StartMenu from "../components/layout/StartMenu";
 import { motion } from "framer-motion";
 import appsData from "../data/data";
+import { MdPowerSettingsNew } from "react-icons/md";
 // bounds are computed locally using viewport dims; no helper import needed
 import { WINDOW_SIZES } from "../utils/constants";
 import { useWindowSize } from "../hooks";
@@ -171,7 +172,7 @@ function Main() {
         style={{ willChange: "transform" }}
       >
         <div
-          className="desktop-icon w-[4.5rem] flex flex-col justify-start items-center rounded hover:bg-white hover:bg-opacity-10 active:bg-white/20 p-1.5 cursor-pointer touch-manipulation"
+          className="desktop-icon w-20 h-[5.25rem] flex flex-col justify-start items-center rounded hover:bg-white hover:bg-opacity-10 active:bg-white/20 p-1 cursor-pointer touch-manipulation transition-colors"
           onClick={() => {
             if (app.url) {
               window.open(app.url, "_blank", "noopener,noreferrer");
@@ -187,18 +188,20 @@ function Main() {
             }
           }}
         >
-          <img
-            src={app.icon}
-            alt={app.name}
-            className={app.size || "w-10 h-10"}
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            onDragStart={(e) => e.preventDefault()}
-            style={{ imageRendering: "crisp-edges" }}
-          />
-          <div className={`text-center text-[11px] leading-tight select-none pt-1 w-full break-words overflow-hidden ${videoWallpaper ? 'text-black' : ''}`}>
+          <div className="w-10 h-10 flex items-center justify-center shrink-0">
+            <img
+              src={app.icon}
+              alt={app.name}
+              className={app.size || "w-10 h-10"}
+              width="40"
+              height="40"
+              loading="lazy"
+              decoding="async"
+              onDragStart={(e) => e.preventDefault()}
+              style={{ imageRendering: "crisp-edges" }}
+            />
+          </div>
+          <div className={`text-center text-[11px] leading-tight select-none pt-1 w-full line-clamp-2 h-7 flex items-center justify-center ${videoWallpaper ? 'text-black font-medium' : 'text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]'}`}>
             {app.name}
           </div>
         </div>
@@ -305,12 +308,13 @@ function Main() {
   }, [viewportWidth, viewportHeight]);
 
   const handleFadeOutClick = useCallback(() => {
+    if (actionType !== "sleep") return;
     setFadeOut(true);
     setTimeout(() => {
       setIsSleeping(false);
       setFadeOut(false);
     }, 1000);
-  }, []);
+  }, [actionType]);
 
   const images = useMemo(
     () => [
@@ -366,15 +370,56 @@ function Main() {
               <audio src="/audio/lullaby.mp3" autoPlay loop />
             </div>
           )}
+          {actionType === "restart" && (
+            <div className="flex flex-col gap-6 justify-center items-center w-full h-screen text-white select-none">
+              <div className="relative w-14 h-14">
+                <div className="absolute inset-0 rounded-full border-4 border-white/20 border-t-white animate-spin" />
+              </div>
+              <div className="text-xl sm:text-2xl font-light tracking-wide">
+                Restarting
+              </div>
+            </div>
+          )}
           {actionType === "shutdown" && (
-            <div className="flex flex-col gap-4 justify-center items-center w-full h-screen">
-              <img
-                src="/images/fun/xp.jpg"
-                alt="Random"
-                className="w-1/2 h-1/2 object-cover rounded-lg shadow-lg"
-              />
-              <div>BYE BYE👋🏻</div>
+            <div className="flex flex-col gap-6 justify-center items-center w-full h-screen text-white select-none">
+              <div className="relative w-14 h-14">
+                <div className="absolute inset-0 rounded-full border-4 border-white/20 border-t-white animate-spin" />
+              </div>
+              <div className="text-xl sm:text-2xl font-light tracking-wide">
+                Shutting down
+              </div>
               <audio src="/audio/shutdown.mp3" autoPlay />
+            </div>
+          )}
+          {actionType === "off" && (
+            <div className="flex flex-col gap-6 justify-center items-center w-full h-screen text-white select-none p-6">
+              <button
+                onClick={() => {
+                  window.location.replace("/");
+                }}
+                title="Click to turn on PC"
+                className="w-20 h-20 rounded-full bg-white/5 border border-white/20 hover:bg-white/15 hover:border-white/40 active:scale-95 flex items-center justify-center transition-all cursor-pointer group shadow-lg"
+              >
+                <MdPowerSettingsNew className="text-4xl text-neutral-400 group-hover:text-blue-400 transition-colors" />
+              </button>
+              <div className="space-y-1 text-center max-w-md">
+                <h2 className="text-lg sm:text-xl font-medium text-neutral-200">
+                  Your PC is turned off
+                </h2>
+                <p className="text-sm text-neutral-400">
+                  You can safely close this browser tab, or click the power button above to turn your PC back on.
+                </p>
+              </div>
+              <button
+                onClick={() => {
+                  try {
+                    window.close();
+                  } catch (e) {}
+                }}
+                className="text-xs text-neutral-400 hover:text-white px-3 py-1.5 rounded border border-neutral-700 hover:border-neutral-500 transition-colors cursor-pointer"
+              >
+                Close Tab
+              </button>
             </div>
           )}
         </div>

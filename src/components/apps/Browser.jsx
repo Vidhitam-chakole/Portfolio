@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import {
   MdMinimize,
   MdCheckBoxOutlineBlank,
+  MdFilterNone,
   MdClose,
   MdArrowBack,
   MdArrowForward,
@@ -14,25 +15,32 @@ import {
   MdAdd,
 } from "react-icons/md";
 
-const TitleBar = ({ toggleBrowser, bringToFront }) => (
-  <div className="bg-black h-9 w-full flex select-none">
-    <div className="title-bar h-full w-full" onMouseDown={bringToFront}>
+const TitleBar = ({ toggleBrowser, bringToFront, onMaximize, isMaximized }) => (
+  <div className="bg-black h-9 w-full flex select-none" onDoubleClick={onMaximize}>
+    <div className="title-bar h-full w-full cursor-move" onMouseDown={bringToFront}>
     </div>
     <div className="flex shrink-0">
       <button
         type="button"
-        className="text-white hover:bg-neutral-800 mb-2 w-11 flex justify-center items-center text-xl"
+        className="text-white hover:bg-neutral-800 mb-2 w-11 flex justify-center items-center text-xl cursor-pointer"
         onClick={toggleBrowser}
+        title="Minimize"
       >
         <MdMinimize />
       </button>
-      <div className="text-white hover:bg-neutral-800 mb-2 w-11 flex justify-center items-center text-sm">
-        <MdCheckBoxOutlineBlank />
-      </div>
       <button
         type="button"
-        className="text-white hover:bg-red-700 mb-2 w-12 flex justify-center items-center text-xl"
+        className="text-white hover:bg-neutral-800 mb-2 w-11 flex justify-center items-center text-xs cursor-pointer"
+        onClick={onMaximize}
+        title={isMaximized ? "Restore Down" : "Maximize"}
+      >
+        {isMaximized ? <MdFilterNone className="text-xs" /> : <MdCheckBoxOutlineBlank />}
+      </button>
+      <button
+        type="button"
+        className="text-white hover:bg-red-700 mb-2 w-12 flex justify-center items-center text-xl cursor-pointer"
         onClick={toggleBrowser}
+        title="Close"
       >
         <MdClose />
       </button>
@@ -130,16 +138,34 @@ function Browser({ isAppOpen, toggleBrowser, bounds, isActive = false, bringToFr
     toggleBrowser(input);
   }, [toggleBrowser, input]);
 
+  const [isMaximized, setIsMaximized] = useState(false);
+  const toggleMaximize = useCallback(() => setIsMaximized((prev) => !prev), []);
+
   return (
     <>
       <div className={`${isAppOpen && !isMinimized ? "" : "hidden"} ${isActive ? 'z-40' : 'z-30'} w-full h-screen pointer-events-none absolute transition-none`}>
-        <Draggable handle=".title-bar" nodeRef={explorerRef} bounds={bounds}>
+        <Draggable
+          handle=".title-bar"
+          nodeRef={explorerRef}
+          bounds={bounds}
+          disabled={isMaximized}
+          position={isMaximized ? { x: 0, y: 0 } : undefined}
+        >
           <div
             ref={explorerRef}
-            className="window bg-black h-[82vh] max-h-[45rem] w-[95vw] max-w-[70.5rem] rounded-xl overflow-hidden border-neutral-700 border-[1.5px] pointer-events-auto flex flex-col"
+            className={`window bg-black overflow-hidden border-neutral-700 pointer-events-auto flex flex-col shadow-2xl transition-all duration-150 ${
+              isMaximized
+                ? "!fixed !top-0 !left-0 !w-screen !h-[calc(100vh-3rem)] !max-h-none !max-w-none !rounded-none !border-0"
+                : "h-[82vh] max-h-[45rem] w-[95vw] max-w-[70.5rem] rounded-xl border-[1.5px]"
+            }`}
             onMouseDown={bringToFront}
           >
-            <TitleBar toggleBrowser={handleCloseBrowser} bringToFront={bringToFront} />
+            <TitleBar
+              toggleBrowser={handleCloseBrowser}
+              bringToFront={bringToFront}
+              onMaximize={toggleMaximize}
+              isMaximized={isMaximized}
+            />
             <div className="content text-white text-center flex-1 flex flex-col overflow-hidden">
               <TabBar bringToFront={bringToFront} />
               <AddressBar 
@@ -155,6 +181,7 @@ function Browser({ isAppOpen, toggleBrowser, bounds, isActive = false, bringToFr
                     className="w-full h-full flex-grow border-0" 
                     id="chrome-screen" 
                     title="Chrome Url"
+                    allow="fullscreen"
                   ></iframe>
                 </div>
               </div>
